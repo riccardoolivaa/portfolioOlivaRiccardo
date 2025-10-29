@@ -101,54 +101,6 @@
             background: var(--accent);
         }
 
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            z-index: 1001;
-            padding: 10px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger:hover {
-            background: rgba(20, 184, 166, 0.1);
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--accent);
-            margin: 3px 0;
-            transition: all 0.3s ease;
-            border-radius: 3px;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-                position: fixed;
-                top: 15px;
-                left: 15px;
-                background: var(--card-bg);
-                border: 2px solid var(--border);
-                box-shadow: 0 4px 15px var(--shadow);
-            }
-        }
-
         /* Mobile Menu Overlay */
         .mobile-nav-overlay {
             display: none;
@@ -1378,18 +1330,6 @@
                 <>
                     <Terminal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
                     <BackToTop />
-
-                    {/* Hamburger Menu Button */}
-                    <button 
-                        className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label="Toggle mobile menu"
-                        aria-expanded={mobileMenuOpen}
-                    >
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
 
                     {/* Theme Toggle */}
                     <button 
