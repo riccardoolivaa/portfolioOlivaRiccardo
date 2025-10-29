@@ -1032,12 +1032,12 @@
 
             const commands = {
                 help: 'Available commands:\n• help - Show this message\n• about - Learn more about me\n• skills - View my technical skills\n• projects - List my projects\n• contact - Get my contact info\n• music - Check out my music\n• passions - My hobbies and interests\n• clear - Clear terminal\n• exit - Close terminal',
-                about: 'I\'m Riccardo Oliva, a Software Engineer at Max Mara Fashion Group and Computer Engineering student specializing in AI. I\'m a creative problem-solver who loves tackling complex challenges. What drives me is finding innovative solutions and bringing ideas to life!',
-                skills: 'Technical Skills:\n• Advanced: Python (95%), SQL (90%)\n• Languages: PL/SQL (85%), C++ (70%), Java (65%)\n• Web: HTML5, CSS, Flask, Jinja\n• Tools: Git, JIRA, Confluence, DAM, PIM, SRM, ERP',
+                about: 'I\'m Riccardo Oliva, a Software Engineer at Max Mara Fashion Group and Computer Engineering student. I\'m a creative problem-solver who loves tackling complex challenges. What drives me is finding innovative solutions and bringing ideas to life!',
+                skills: 'Technical Skills:\n• Advanced: Python (95%), SQL (90%)\n• Languages: PL/SQL (85%), C++ (70%), Java (65%)\n• Web: HTML5, CSS, Flask, Jinja\n• Tools:  JIRA, Confluence, DAM, PIM, SRM, ERP',
                 projects: 'Recent Projects:\n1. Andrea Oliva Architetto - Full website for architecture studio\n   Visit: andreaolivaarchitetto.netlify.app',
-                contact: 'Contact Information:\n• Email: riccardooliva2003@gmail.com\n• Phone: +39 339 143 0692\n• Location: Reggio nell\'Emilia, IT\n• SoundCloud: soundcloud.com/riccardo-oliva-134902660',
+                contact: 'Contact Information:\n• Email: riccardooliva2003@gmail.com\n• Phone: +39 339 143 0692\n• Location: Reggio nell\'Emilia, IT',
                 music: '🎵 Music Producer on SoundCloud\nGenre: Darkwave Chill & Experimental\nLatest track: "I Loved U"\nCheck out my profile: soundcloud.com/riccardo-oliva-134902660',
-                passions: 'Beyond Tech:\n🎵 Music Production - Creating darkwave chill tracks like "I Loved U"\n🍳 Cooking - Experimenting with all kinds of cuisine\n🤖 AI - Fascinated by artificial intelligence and its possibilities',
+                passions: 'Beyond Tech:\n🎵 Music Production - Creating darkwave experimental tracks"\n🍳 Cooking - Experimenting with all kinds of cuisine\n🤖 AI - Fascinated by artificial intelligence and its possibilities',
                 clear: 'CLEAR',
                 exit: 'EXIT'
             };
@@ -1322,7 +1322,7 @@
 
             useEffect(() => {
                 const handleScroll = () => {
-                    const sections = ['home', 'about', 'projects', 'passions', 'experience', 'contact'];
+                    const sections = ['home', 'about', 'projects', 'experience', 'passions', 'contact'];
                     const scrollPosition = window.scrollY + 100;
 
                     for (const section of sections) {
@@ -1391,32 +1391,6 @@
                         <span></span>
                     </button>
 
-                    {/* Mobile Navigation Overlay */}
-                    <div className={`mobile-nav-overlay ${mobileMenuOpen ? 'active' : ''}`}>
-                        <div className="mobile-nav-content">
-                            {[
-                                { id: 'home', icon: 'fa-home', label: 'Home' },
-                                { id: 'about', icon: 'fa-user', label: 'About' },
-                                { id: 'projects', icon: 'fa-code', label: 'Projects' },
-                                { id: 'passions', icon: 'fa-heart', label: 'Passions' },
-                                { id: 'experience', icon: 'fa-briefcase', label: 'Experience' },
-                                { id: 'contact', icon: 'fa-envelope', label: 'Contact' }
-                            ].map((item) => (
-                                <div
-                                    key={item.id}
-                                    className={`mobile-nav-item ${activeSection === item.id ? 'active' : ''}`}
-                                    onClick={() => scrollToSection(item.id)}
-                                    role="button"
-                                    tabIndex="0"
-                                    onKeyPress={(e) => e.key === 'Enter' && scrollToSection(item.id)}
-                                >
-                                    <i className={`fas ${item.icon}`}></i>
-                                    <span>{item.label}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
                     {/* Theme Toggle */}
                     <button 
                         className="theme-toggle" 
@@ -1434,7 +1408,7 @@
 
                     {/* Floating Menu (Desktop) */}
                     <nav className="floating-menu" aria-label="Section navigation">
-                        {['home', 'about', 'projects', 'passions', 'experience', 'contact'].map((section) => (
+                        {['home', 'about', 'projects','experience', 'passions',  'contact'].map((section) => (
                             <div
                                 key={section}
                                 className={`nav-dot ${activeSection === section ? 'active' : ''}`}
@@ -1454,8 +1428,8 @@
                             { id: 'home', icon: 'fa-home', label: 'Home' },
                             { id: 'about', icon: 'fa-user', label: 'About' },
                             { id: 'projects', icon: 'fa-code', label: 'Projects' },
-                            { id: 'passions', icon: 'fa-heart', label: 'Passions' },
                             { id: 'experience', icon: 'fa-briefcase', label: 'Work' },
+                            { id: 'passions', icon: 'fa-heart', label: 'Passions' },     
                             { id: 'contact', icon: 'fa-envelope', label: 'Contact' }
                         ].map((item) => (
                             <div
@@ -1624,6 +1598,83 @@
                             </div>
                         </section>
 
+                        
+                        {/* Experience Section */}
+                        <section id="experience" className="min-h-screen flex items-center justify-center px-6 py-20">
+                            <div className="max-w-6xl w-full mx-auto">
+                                <h2 className="text-4xl font-bold mb-12 text-center">
+                                    Experience & <span className="gradient-text">Education</span>
+                                </h2>
+
+                                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                                    <div>
+                                        <h3 className="text-2xl font-semibold mb-6 flex items-center">
+                                            <i className="fas fa-briefcase mr-3" style={{ color: 'var(--accent)' }}></i>
+                                            Work Experience
+                                        </h3>
+                                        <div className="space-y-6">
+                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
+                                                <div className="text-sm mb-1" style={{ color: 'var(--accent)' }}>August 2024 - Present</div>
+                                                <h4 className="text-xl font-semibold mb-2">Software Engineer</h4>
+                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
+                                                <ul className="text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
+                                                    <li>• Managed DAM, PIM, SRM systems</li>
+                                                    <li>• Software testing and digital project management</li>
+                                                    <li>• Tools: PL/SQL, Confluence, JIRA, Python</li>
+                                                </ul>
+                                            </div>
+
+                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
+                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2022 - August 2022</div>
+                                                <h4 className="text-xl font-semibold mb-2">Software Programmer Intern</h4>
+                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
+                                                <ul className="text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
+                                                    <li>• Developed ERP modules using Python</li>
+                                                    <li>• Internal framework development</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <h3 className="text-2xl font-semibold mb-6 flex items-center">
+                                            <i className="fas fa-graduation-cap mr-3" style={{ color: 'var(--accent)' }}></i>
+                                            Education
+                                        </h3>
+                                        <div className="space-y-6">
+                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
+                                                <div className="text-sm mb-1" style={{ color: 'var(--accent)' }}>March 2025 - April 2029 (Expected)</div>
+                                                <h4 className="text-xl font-semibold mb-2">Bachelor's Degree</h4>
+                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Computer Engineering - AI</p>
+                                                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Università degli Studi "Guglielmo Marconi"</p>
+                                            </div>
+
+                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
+                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2024 - August 2024</div>
+                                                <h4 className="text-xl font-semibold mb-2">Software Developer Certification</h4>
+                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Umana S.P.A</p>
+                                            </div>
+
+                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
+                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>2018 - 2023</div>
+                                                <h4 className="text-xl font-semibold mb-2">Diploma</h4>
+                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Computer Science & Telecommunications</p>
+                                                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>I.I.S. Blaise Pascal</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="text-center rounded-lg p-8" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(13, 148, 136, 0.1) 100%)', border: '2px solid var(--accent)' }}>
+                                    <h3 className="text-2xl font-semibold mb-4">Download Full CV</h3>
+                                    <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>Get the complete PDF version of my curriculum vitae</p>
+                                    <button onClick={downloadCV} className="btn-primary">
+                                        <i className="fas fa-file-pdf mr-2"></i>Download PDF
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
                         {/* Passions Section */}
                         <section id="passions" className="min-h-screen flex items-center justify-center px-6 py-20">
                             <div className="max-w-6xl w-full mx-auto">
@@ -1723,81 +1774,6 @@
                             </div>
                         </section>
 
-                        {/* Experience Section */}
-                        <section id="experience" className="min-h-screen flex items-center justify-center px-6 py-20">
-                            <div className="max-w-6xl w-full mx-auto">
-                                <h2 className="text-4xl font-bold mb-12 text-center">
-                                    Experience & <span className="gradient-text">Education</span>
-                                </h2>
-
-                                <div className="grid md:grid-cols-2 gap-8 mb-12">
-                                    <div>
-                                        <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                                            <i className="fas fa-briefcase mr-3" style={{ color: 'var(--accent)' }}></i>
-                                            Work Experience
-                                        </h3>
-                                        <div className="space-y-6">
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--accent)' }}>August 2024 - Present</div>
-                                                <h4 className="text-xl font-semibold mb-2">Software Engineer</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
-                                                <ul className="text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
-                                                    <li>• Managed DAM, PIM, SRM systems</li>
-                                                    <li>• Software testing and digital project management</li>
-                                                    <li>• Tools: PL/SQL, Confluence, JIRA, Python</li>
-                                                </ul>
-                                            </div>
-
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2022 - August 2022</div>
-                                                <h4 className="text-xl font-semibold mb-2">Software Programmer Intern</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
-                                                <ul className="text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
-                                                    <li>• Developed ERP modules using Python</li>
-                                                    <li>• Internal framework development</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                                            <i className="fas fa-graduation-cap mr-3" style={{ color: 'var(--accent)' }}></i>
-                                            Education
-                                        </h3>
-                                        <div className="space-y-6">
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--accent)' }}>March 2025 - April 2029 (Expected)</div>
-                                                <h4 className="text-xl font-semibold mb-2">Bachelor's Degree</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Computer Engineering - AI</p>
-                                                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Università degli Studi "Guglielmo Marconi"</p>
-                                            </div>
-
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2024 - August 2024</div>
-                                                <h4 className="text-xl font-semibold mb-2">Software Developer Certification</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Umana S.P.A</p>
-                                            </div>
-
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>2018 - 2023</div>
-                                                <h4 className="text-xl font-semibold mb-2">Diploma</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Computer Science & Telecommunications</p>
-                                                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>I.I.S. Blaise Pascal</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="text-center rounded-lg p-8" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(13, 148, 136, 0.1) 100%)', border: '2px solid var(--accent)' }}>
-                                    <h3 className="text-2xl font-semibold mb-4">Download Full CV</h3>
-                                    <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>Get the complete PDF version of my curriculum vitae</p>
-                                    <button onClick={downloadCV} className="btn-primary">
-                                        <i className="fas fa-file-pdf mr-2"></i>Download PDF
-                                    </button>
-                                </div>
-                            </div>
-                        </section>
 
                         {/* Contact Section with Netlify Forms */}
                         <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20">
