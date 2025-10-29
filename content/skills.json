@@ -1,0 +1,28 @@
+{
+    "skills": [
+      {
+        "name": "Python",
+        "level": 95
+      },
+      {
+        "name": "SQL",
+        "level": 90
+      },
+      {
+        "name": "PL/SQL",
+        "level": 85
+      },
+      {
+        "name": "HTML5 & CSS",
+        "level": 80
+      },
+      {
+        "name": "C++",
+        "level": 70
+      },
+      {
+        "name": "Java",
+        "level": 65
+      }
+    ]
+  }

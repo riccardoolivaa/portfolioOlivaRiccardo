@@ -1,0 +1,70 @@
+{
+  "projects": [
+    {
+      "title": "Andrea Oliva Architetto",
+      "description": "Built a complete website for architectural studio Andrea Oliva, showcasing projects and services. My first major web development project that taught me the power of bringing creative visions to life.",
+      "category": "Web Development",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "Design"
+      ],
+      "link": "https://andreaolivaarchitetto.netlify.app",
+      "featured": 1,
+      "screenshot": "",
+      "id": "andrea-oliva-architetto"
+    }
+  ],
+  "experiences": [
+    {
+      "company": "Max Mara Fashion Group",
+      "position": "Software Engineer",
+      "start_date": "August 2024",
+      "end_date": "Present",
+      "description": "• Managed DAM, PIM, SRM systems\n• Software testing and digital project management\n• Tools: PL/SQL, Confluence, JIRA, Python",
+      "tools": [
+        "PL/SQL",
+        "Confluence",
+        "JIRA",
+        "Python"
+      ],
+      "current": 1,
+      "order": 1,
+      "id": "max-mara-software-engineer"
+    }
+  ],
+  "cooking": [],
+  "bio": {
+    "about": "I'm a Software Engineer at Max Mara Fashion Group, where I manage complex systems including DAM, PIM, and SRM platforms. I specialize in creative problem-solving and finding innovative solutions to technical challenges.\nCurrently pursuing a Bachelor's Degree in Computer Engineering with a focus on Artificial Intelligence. While programming isn't my main passion, I'm genuinely fascinated by AI and its endless possibilities. What truly drives me is the creative aspect of problem-solving and bringing ideas to life.",
+    "tagline": "Creative problem-solver at Max Mara Fashion Group. Fascinated by AI, passionate about music production and cooking."
+  },
+  "skills": {
+    "skills": [
+      {
+        "name": "Python",
+        "level": 95
+      },
+      {
+        "name": "SQL",
+        "level": 90
+      },
+      {
+        "name": "PL/SQL",
+        "level": 85
+      },
+      {
+        "name": "HTML5 & CSS",
+        "level": 80
+      },
+      {
+        "name": "C++",
+        "level": 70
+      },
+      {
+        "name": "Java",
+        "level": 65
+      }
+    ]
+  },
+  "buildDate": "2025-10-29T21:54:02.153Z"
+}
