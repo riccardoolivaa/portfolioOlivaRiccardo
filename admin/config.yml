@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Category", name: "category", widget: "select", options: ["Web Development", "Enterprise Software", "Data Management", "AI & Machine Learning"]}
+      - {label: "Technologies", name: "technologies", widget: "list"}
+      - {label: "Link", name: "link", widget: "string", required: false}
+      - {label: "Featured", name: "featured", widget: "boolean", default: false}
+      - {label: "Screenshot", name: "screenshot", widget: "image", required: false}
+
+  - name: "experiences"
+    label: "Work Experiences"
+    folder: "content/experiences"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Company", name: "company", widget: "string"}
+      - {label: "Position", name: "position", widget: "string"}
+      - {label: "Start Date", name: "start_date", widget: "string"}
+      - {label: "End Date", name: "end_date", widget: "string", required: false, default: "Present"}
+      - {label: "Description", name: "description", widget: "markdown"}
+      - {label: "Tools", name: "tools", widget: "list"}
+      - {label: "Current", name: "current", widget: "boolean", default: false}
+
+  - name: "cooking"
+    label: "Cooking Photos"
+    folder: "content/cooking"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Dish Name", name: "name", widget: "string"}
+      - {label: "Photo", name: "photo", widget: "image"}
+      - {label: "Alt Text", name: "alt", widget: "string"}
+      - {label: "Order", name: "order", widget: "number", default: 1}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Bio"
+        name: "bio"
+        file: "content/bio.md"
+        fields:
+          - {label: "Who I Am", name: "about", widget: "markdown"}
+          - {label: "Tagline", name: "tagline", widget: "string"}
+      
+      - label: "Skills"
+        name: "skills"
+        file: "content/skills.json"
+        fields:
+          - label: "Programming Skills"
+            name: "skills"
+            widget: "list"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Level (%)", name: "level", widget: "number", min: 0, max: 100}
+          
+
+preview_path: /preview/{{slug}}
+
+# Custom widget
+local_backend: true  # Per sviluppo locale

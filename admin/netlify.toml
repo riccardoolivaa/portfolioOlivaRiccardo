@@ -1,0 +1,6 @@
+[build]
+  command = "node build-data.js && echo 'Build complete'"
+  publish = "."
+
+[[plugins]]
+  package = "netlify-plugin-inline-functions-env"
