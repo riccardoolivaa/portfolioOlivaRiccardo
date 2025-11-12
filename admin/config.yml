@@ -23,11 +23,13 @@ collections:
     fields:
       - {label: "Title", name: "title", widget: "string", required: true}
       - {label: "Description", name: "description", widget: "text", required: true}
-      - {label: "Category", name: "category", widget: "select", options: ["Web Development", "Enterprise Software", "Data Management", "AI & Machine Learning"], required: true}
+      - {label: "Category", name: "category", widget: "select", options: ["Web Development", "Enterprise Software", "Data Management", "AI & Machine Learning", "Backend Development", "Automation"], required: true}
       - {label: "Technologies", name: "technologies", widget: "list", required: true}
       - {label: "Link", name: "link", widget: "string", required: false, hint: "URL del progetto"}
+      - {label: "GitHub Repository", name: "github", widget: "string", required: false, hint: "URL repository GitHub"}
       - {label: "Featured", name: "featured", widget: "boolean", default: false, hint: "Mostra come progetto in evidenza"}
       - {label: "Screenshot", name: "screenshot", widget: "image", required: false, hint: "Carica uno screenshot del progetto"}
+      - {label: "Order", name: "order", widget: "number", default: 1, hint: "Ordine di visualizzazione"}
 
   - name: "experiences"
     label: "Work Experiences"
@@ -41,23 +43,10 @@ collections:
       - {label: "Position", name: "position", widget: "string", required: true}
       - {label: "Start Date", name: "start_date", widget: "string", required: true, hint: "es. August 2024"}
       - {label: "End Date", name: "end_date", widget: "string", required: false, default: "Present"}
-      - {label: "Description", name: "description", widget: "markdown", required: true}
+      - {label: "Description", name: "description", widget: "markdown", required: true, hint: "Usa bullet points (• o -) per elencare le responsabilità"}
       - {label: "Tools & Technologies", name: "tools", widget: "list", required: false}
       - {label: "Current Position", name: "current", widget: "boolean", default: false}
       - {label: "Order", name: "order", widget: "number", default: 1, hint: "Ordine di visualizzazione (1 = più recente)"}
-
-  - name: "cooking"
-    label: "Cooking Photos"
-    folder: "content/cooking"
-    create: true
-    slug: "{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - {label: "Dish Name", name: "name", widget: "string", required: true}
-      - {label: "Photo", name: "photo", widget: "image", required: true}
-      - {label: "Alt Text", name: "alt", widget: "string", required: true, hint: "Descrizione della foto per accessibilità"}
-      - {label: "Order", name: "order", widget: "number", default: 1, hint: "Ordine di visualizzazione"}
 
   - name: "settings"
     label: "Site Settings"
@@ -66,8 +55,8 @@ collections:
         name: "bio"
         file: "content/bio.md"
         fields:
-          - {label: "About Me (Full Text)", name: "about", widget: "markdown", hint: "Testo completo della sezione About"}
-          - {label: "Tagline", name: "tagline", widget: "string", hint: "Breve descrizione che appare nell'hero"}
+          - {label: "About Me (Full Text)", name: "about", widget: "markdown", hint: "Testo completo della sezione About - scrivi in prima persona"}
+          - {label: "Tagline", name: "tagline", widget: "string", hint: "Breve descrizione che appare nell'hero (max 100 caratteri)"}
       
       - label: "Skills"
         name: "skills"

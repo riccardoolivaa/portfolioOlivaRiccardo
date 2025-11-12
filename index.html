@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Riccardo Oliva - Software Engineer, AI enthusiast, music producer, and creative problem solver">
+    <meta name="description" content="Riccardo Oliva - Software Engineer at Max Mara Fashion Group, AI student, and creative problem solver">
     <meta name="theme-color" content="#14B8A6">
     <title>Riccardo Oliva - Software Engineer & AI Student</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -11,9 +11,6 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Netlify Identity Widget -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
@@ -58,6 +55,20 @@
             color: var(--text-primary);
             overflow-x: hidden;
             transition: background 0.3s ease, color 0.3s ease;
+            font-size: 16px;
+        }
+
+        /* Mobile-first responsive typography */
+        html {
+            font-size: 14px;
+        }
+
+        @media (min-width: 640px) {
+            html { font-size: 15px; }
+        }
+
+        @media (min-width: 768px) {
+            html { font-size: 16px; }
         }
 
         .code-font {
@@ -68,24 +79,9 @@
             scroll-behavior: smooth;
         }
 
-        .skip-to-content {
-            position: absolute;
-            left: -9999px;
-            z-index: 999;
-            padding: 1em;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-        }
-
-        .skip-to-content:focus {
-            left: 50%;
-            transform: translateX(-50%);
-            top: 0;
-        }
-
+        /* Improved mobile scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -101,67 +97,13 @@
             background: var(--accent);
         }
 
-        /* Mobile Menu Overlay */
-        .mobile-nav-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100vh;
-            background: var(--card-bg);
-            border-right: 2px solid var(--border);
-            z-index: 1000;
-            transition: left 0.3s ease;
-            box-shadow: 4px 0 15px var(--shadow);
-            overflow-y: auto;
-        }
-
-        .mobile-nav-overlay.active {
-            left: 0;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-nav-overlay {
-                display: block;
-            }
-        }
-
-        .mobile-nav-content {
-            padding: 80px 20px 20px;
-        }
-
-        .mobile-nav-item {
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 2px solid transparent;
-        }
-
-        .mobile-nav-item:hover, .mobile-nav-item.active {
-            background: rgba(20, 184, 166, 0.1);
-            border-color: var(--accent);
-        }
-
-        .mobile-nav-item i {
-            font-size: 20px;
-            color: var(--accent);
-            width: 25px;
-        }
-
-        /* Back to Top Button */
+        /* Mobile optimized back to top button */
         .back-to-top {
             position: fixed;
-            bottom: 90px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 80px;
+            right: 20px;
+            width: 48px;
+            height: 48px;
             background: var(--accent);
             border-radius: 50%;
             display: flex;
@@ -173,6 +115,16 @@
             visibility: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
+            touch-action: manipulation;
+        }
+
+        @media (min-width: 768px) {
+            .back-to-top {
+                bottom: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+            }
         }
 
         .back-to-top.visible {
@@ -180,23 +132,13 @@
             visibility: visible;
         }
 
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.6);
+        .back-to-top:active {
+            transform: scale(0.95);
         }
 
         .back-to-top i {
             color: white;
-            font-size: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .back-to-top {
-                bottom: 80px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-            }
+            font-size: 18px;
         }
 
         /* Skills Progress Bar */
@@ -225,7 +167,7 @@
             width: var(--progress-width);
         }
 
-        /* Typing animation for code */
+        /* Typing animation */
         .typing-line {
             opacity: 0;
         }
@@ -271,53 +213,20 @@
             }
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px var(--accent); }
-            50% { box-shadow: 0 0 40px var(--accent); }
-        }
-
-        @keyframes waveform {
-            0%, 100% { height: 20%; }
-            50% { height: 100%; }
-        }
-
         .fade-in-up {
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
-        .slide-in {
-            animation: slideIn 0.8s ease-out forwards;
-        }
-
-        .float-animation {
-            animation: float 3s ease-in-out infinite;
-        }
-
+        /* Mobile-optimized theme toggle */
         .theme-toggle {
             position: fixed;
-            top: 30px;
-            right: 30px;
+            top: 15px;
+            right: 15px;
             z-index: 1000;
             background: var(--card-bg);
             border: 2px solid var(--border);
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -325,26 +234,20 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px var(--shadow);
+            touch-action: manipulation;
         }
 
-        .theme-toggle:hover {
-            border-color: var(--accent);
-            transform: scale(1.1);
-            box-shadow: 0 0 25px var(--accent);
-        }
-
-        .theme-toggle:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .theme-toggle {
-                top: 15px;
-                right: 15px;
-                width: 50px;
-                height: 50px;
+                top: 30px;
+                right: 30px;
+                width: 60px;
+                height: 60px;
             }
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
         }
 
         .terminal {
@@ -352,6 +255,8 @@
             border: 2px solid var(--border);
             border-radius: 12px;
             box-shadow: 0 20px 60px var(--shadow);
+            max-height: 80vh;
+            overflow: hidden;
         }
 
         .terminal-header {
@@ -369,10 +274,7 @@
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.2s ease;
-        }
-
-        .terminal-button:hover {
-            transform: scale(1.2);
+            flex-shrink: 0;
         }
 
         .terminal-button.red { background: #ff5f56; }
@@ -380,17 +282,17 @@
         .terminal-button.green { background: #27c93f; }
 
         .terminal-body {
-            padding: 20px;
-            max-height: 400px;
+            padding: 15px;
+            max-height: 50vh;
             overflow-y: auto;
-            font-size: 14px;
+            font-size: 13px;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .terminal-body {
-                max-height: 300px;
-                font-size: 12px;
-                padding: 15px;
+                padding: 20px;
+                max-height: 400px;
+                font-size: 14px;
             }
         }
 
@@ -398,11 +300,13 @@
             margin: 8px 0;
             display: flex;
             align-items: flex-start;
+            word-break: break-word;
         }
 
         .terminal-prompt {
             color: var(--accent);
             margin-right: 8px;
+            flex-shrink: 0;
         }
 
         .terminal-input {
@@ -410,43 +314,53 @@
             border: none;
             color: var(--text-primary);
             font-family: 'Fira Code', monospace;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             flex: 1;
             caret-color: var(--accent);
+            min-width: 0;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .terminal-input {
-                font-size: 12px;
+                font-size: 14px;
             }
         }
 
         .terminal-output {
             color: var(--text-secondary);
             margin-left: 20px;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
+        /* Mobile-optimized terminal hint */
         .terminal-hint {
             position: fixed;
-            bottom: 30px;
-            left: 30px;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--card-bg);
             border: 2px solid var(--accent);
-            padding: 12px 20px;
+            padding: 8px 16px;
             border-radius: 30px;
-            font-size: 14px;
+            font-size: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             z-index: 100;
-            animation: glow 2s ease-in-out infinite;
             box-shadow: 0 4px 15px var(--shadow);
-            transition: all 0.3s ease;
+            max-width: 90%;
         }
 
-        .terminal-hint:hover {
-            transform: scale(1.05);
+        @media (min-width: 768px) {
+            .terminal-hint {
+                bottom: 30px;
+                left: 30px;
+                transform: none;
+                padding: 12px 20px;
+                font-size: 14px;
+            }
         }
 
         .terminal-hint kbd {
@@ -455,25 +369,13 @@
             padding: 4px 12px;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 14px;
         }
 
-        @media (max-width: 768px) {
-            .terminal-hint {
-                bottom: 80px;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 12px;
-                padding: 8px 16px;
+        @media (min-width: 768px) {
+            .terminal-hint kbd {
+                font-size: 16px;
             }
-            
-            .terminal-hint:hover {
-                transform: translateX(-50%) scale(1.05);
-            }
-        }
-
-        .code-line {
-            opacity: 0;
         }
 
         .gradient-text {
@@ -483,61 +385,36 @@
             background-clip: text;
         }
 
+        /* Mobile-first project cards */
         .project-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             background: var(--card-bg);
             border: 2px solid var(--border);
-            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
 
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            opacity: 0;
-            transition: all 0.6s ease;
-        }
-
-        .project-card:hover::before {
-            left: 100%;
-            opacity: 0.2;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(20, 184, 166, 0.3);
-        }
-
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .project-card:hover {
-                transform: translateY(-5px) scale(1.01);
+                transform: translateY(-10px);
+                border-color: var(--accent);
+                box-shadow: 0 20px 50px rgba(20, 184, 166, 0.3);
             }
         }
 
-        .project-card:focus-within {
-            border-color: var(--accent);
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-        }
-
+        /* Desktop-only floating menu */
         .floating-menu {
-            position: fixed;
-            top: 50%;
-            right: 30px;
-            transform: translateY(-50%);
-            z-index: 1000;
+            display: none;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .floating-menu {
-                display: none;
+                display: block;
+                position: fixed;
+                top: 50%;
+                right: 30px;
+                transform: translateY(-50%);
+                z-index: 1000;
             }
         }
 
@@ -558,15 +435,11 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
-        .nav-dot:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 4px;
-        }
-
+        /* Mobile-first buttons with larger touch targets */
         .btn-primary {
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
             color: white;
-            padding: 14px 32px;
+            padding: 14px 28px;
             border-radius: 10px;
             border: none;
             cursor: pointer;
@@ -576,44 +449,26 @@
             overflow: hidden;
             display: inline-block;
             text-decoration: none;
+            font-size: 15px;
+            min-height: 48px;
+            touch-action: manipulation;
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(20, 184, 166, 0.4);
-        }
-
-        .btn-primary:focus {
-            outline: 3px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .btn-primary {
-                padding: 12px 24px;
-                font-size: 14px;
+                padding: 14px 32px;
+                font-size: 16px;
             }
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--accent);
-            padding: 14px 32px;
+            padding: 14px 28px;
             border-radius: 10px;
             border: 2px solid var(--accent);
             cursor: pointer;
@@ -621,285 +476,112 @@
             font-weight: 600;
             display: inline-block;
             text-decoration: none;
+            font-size: 15px;
+            min-height: 48px;
+            touch-action: manipulation;
         }
 
-        .btn-secondary:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(20, 184, 166, 0.3);
-        }
-
-        .btn-secondary:focus {
-            outline: 3px solid var(--accent);
-            outline-offset: 4px;
-        }
-
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .btn-secondary {
-                padding: 12px 24px;
-                font-size: 14px;
+                padding: 14px 32px;
+                font-size: 16px;
             }
         }
 
-        .filter-btn {
-            padding: 10px 24px;
-            border-radius: 25px;
+        .btn-secondary:active {
+            transform: scale(0.98);
+        }
+
+        /* Mobile menu with better touch targets */
+        .mobile-menu {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: var(--card-bg);
-            border: 2px solid var(--border);
+            border-top: 2px solid var(--border);
+            padding: 8px;
+            justify-content: space-around;
+            z-index: 1000;
+            box-shadow: 0 -4px 15px var(--shadow);
+        }
+
+        @media (min-width: 768px) {
+            .mobile-menu {
+                display: none;
+            }
+        }
+
+        .mobile-menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
             color: var(--text-secondary);
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
+            padding: 10px 8px;
+            border-radius: 8px;
+            font-size: 10px;
+            flex: 1;
+            max-width: 80px;
+            min-height: 56px;
+            touch-action: manipulation;
         }
 
-        .filter-btn:hover {
-            border-color: var(--accent);
+        .mobile-menu-item i {
+            font-size: 20px;
+        }
+
+        .mobile-menu-item:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-menu-item.active {
             color: var(--accent);
-            transform: translateY(-2px);
+            background: rgba(20, 184, 166, 0.1);
         }
 
-        .filter-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-            box-shadow: 0 5px 15px rgba(20, 184, 166, 0.3);
-        }
-
-        .filter-btn:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 3px;
-        }
-
-        .mobile-menu {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu {
-                display: flex;
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: var(--card-bg);
-                border-top: 2px solid var(--border);
-                padding: 12px 10px;
-                justify-content: space-around;
-                z-index: 1000;
-                box-shadow: 0 -4px 15px var(--shadow);
-            }
-
-            .mobile-menu-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 4px;
-                color: var(--text-secondary);
-                cursor: pointer;
-                transition: all 0.3s ease;
-                padding: 6px;
-                border-radius: 8px;
-                font-size: 10px;
-            }
-
-            .mobile-menu-item i {
-                font-size: 18px;
-            }
-
-            .mobile-menu-item:hover, .mobile-menu-item.active {
-                color: var(--accent);
-                background: rgba(20, 184, 166, 0.1);
-            }
-        }
-
+        /* Mobile-first skill badges */
         .skill-badge {
             background: var(--card-bg);
             border: 2px solid var(--border);
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 14px;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
             transition: all 0.3s ease;
-            cursor: default;
+            display: inline-block;
         }
 
-        .skill-badge:hover {
-            border-color: var(--accent);
-            background: rgba(20, 184, 166, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(20, 184, 166, 0.2);
-        }
-
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .skill-badge {
-                padding: 8px 14px;
-                font-size: 12px;
+                padding: 10px 18px;
+                font-size: 14px;
+                border-radius: 25px;
             }
         }
 
-        .music-card {
-            background: var(--card-bg);
-            border: 2px solid var(--border);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .music-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .music-card {
-                padding: 20px;
-            }
-        }
-
-        .waveform-bar {
-            width: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-            animation: waveform 1s ease-in-out infinite;
-            opacity: 0.7;
-        }
-
-        .waveform-bar:nth-child(1) { animation-delay: 0s; }
-        .waveform-bar:nth-child(2) { animation-delay: 0.1s; }
-        .waveform-bar:nth-child(3) { animation-delay: 0.2s; }
-        .waveform-bar:nth-child(4) { animation-delay: 0.3s; }
-        .waveform-bar:nth-child(5) { animation-delay: 0.4s; }
-        .waveform-bar:nth-child(6) { animation-delay: 0.5s; }
-        .waveform-bar:nth-child(7) { animation-delay: 0.6s; }
-
-        .cooking-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        @media (max-width: 768px) {
-            .cooking-gallery {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 10px;
-            }
-        }
-
-        .cooking-photo {
-            position: relative;
-            aspect-ratio: 1;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid var(--border);
-        }
-
-        .cooking-photo:hover {
-            transform: scale(1.05);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
-        }
-
-        .cooking-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .cooking-photo-placeholder {
-            width: 100%;
-            height: 100%;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 10px;
-            color: var(--text-tertiary);
-        }
-
-        .cooking-photo-placeholder i {
-            font-size: 3rem;
-            color: var(--accent);
-            opacity: 0.5;
-        }
-
-        @media (max-width: 768px) {
-            .cooking-photo-placeholder i {
-                font-size: 2rem;
-            }
-            
-            .cooking-photo-placeholder p {
-                font-size: 10px;
-            }
-        }
-
-        *:focus {
-            outline: 2px solid var(--accent);
-            outline-offset: 2px;
-        }
-
-        button:focus, a:focus {
-            outline-width: 3px;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
+        /* Social icons with better touch targets */
         .social-icon {
             transition: all 0.3s ease;
-        }
-
-        .social-icon:hover {
-            color: var(--accent);
-            transform: translateY(-3px);
-            filter: drop-shadow(0 5px 10px var(--accent));
-        }
-
-        .project-screenshot {
-            width: 100%;
-            height: 200px;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .project-screenshot:hover {
-            border-color: var(--accent);
-        }
-
-        .project-screenshot img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-screenshot-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            gap: 10px;
-            color: var(--text-tertiary);
+            min-width: 44px;
+            min-height: 44px;
+            touch-action: manipulation;
         }
 
-        .project-screenshot-placeholder i {
-            font-size: 3rem;
-            color: var(--accent);
-            opacity: 0.5;
+        .social-icon:active {
+            transform: scale(0.95);
+        }
+
+        @media (min-width: 768px) {
+            .social-icon:hover {
+                color: var(--accent);
+                transform: translateY(-3px);
+            }
         }
 
         /* Loading spinner */
@@ -917,46 +599,104 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsive typography */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem !important;
-            }
-            
-            h2 {
-                font-size: 2rem !important;
-            }
-            
-            h3 {
-                font-size: 1.5rem !important;
-            }
-            
-            .text-xl {
-                font-size: 1.125rem !important;
+        /* Mobile-first responsive spacing */
+        .section-padding {
+            padding: 60px 20px;
+        }
+
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 80px 24px;
             }
         }
 
-        /* Responsive spacing */
-        @media (max-width: 768px) {
-            .px-6 {
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 100px 32px;
             }
-            
-            .py-20 {
-                padding-top: 3rem !important;
-                padding-bottom: 3rem !important;
+        }
+
+        @media (min-width: 1024px) {
+            .section-padding {
+                padding: 120px 40px;
             }
-            
-            .gap-12 {
-                gap: 2rem !important;
+        }
+
+        /* Mobile-first headings */
+        h1 {
+            font-size: 2.25rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 640px) {
+            h1 { font-size: 2.75rem; }
+        }
+
+        @media (min-width: 768px) {
+            h1 { font-size: 3.5rem; }
+        }
+
+        @media (min-width: 1024px) {
+            h1 { font-size: 4rem; }
+        }
+
+        h2 {
+            font-size: 1.875rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 640px) {
+            h2 { font-size: 2.25rem; }
+        }
+
+        @media (min-width: 768px) {
+            h2 { font-size: 2.5rem; }
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            line-height: 1.3;
+        }
+
+        @media (min-width: 768px) {
+            h3 { font-size: 1.875rem; }
+        }
+
+        /* Better text readability on mobile */
+        p, li {
+            line-height: 1.7;
+        }
+
+        /* Optimize terminal for mobile */
+        @media (max-width: 767px) {
+            .terminal {
+                margin: 10px;
+                max-width: calc(100vw - 20px);
+            }
+        }
+
+        /* Improve form inputs for mobile */
+        input, textarea {
+            font-size: 16px; /* Prevents zoom on iOS */
+        }
+
+        /* Better focus states for accessibility */
+        *:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
 </head>
 <body>
-    <a href="#main-content" class="skip-to-content">Skip to main content</a>
-
     <div id="root"></div>
 
     <script type="text/babel">
@@ -964,7 +704,7 @@
 
         const Terminal = ({ isOpen, onClose }) => {
             const [history, setHistory] = useState([
-                { type: 'output', content: 'Welcome to Riccardo\'s interactive terminal! Type "help" for available commands.' }
+                { type: 'output', content: 'Welcome to Riccardo\'s terminal! Type "help" for available commands.' }
             ]);
             const [input, setInput] = useState('');
             const inputRef = useRef(null);
@@ -983,13 +723,13 @@
             }, [history]);
 
             const commands = {
-                help: 'Available commands:\n• help - Show this message\n• about - Learn more about me\n• skills - View my technical skills\n• projects - List my projects\n• contact - Get my contact info\n• music - Check out my music\n• passions - My hobbies and interests\n• clear - Clear terminal\n• exit - Close terminal',
-                about: 'I\'m Riccardo Oliva, a Software Engineer at Max Mara Fashion Group and Computer Engineering student. I\'m a creative problem-solver who loves tackling complex challenges. What drives me is finding innovative solutions and bringing ideas to life!',
-                skills: 'Technical Skills:\n• Advanced: Python (95%), SQL (90%)\n• Languages: PL/SQL (85%), C++ (70%), Java (65%)\n• Web: HTML5, CSS, Flask, Jinja\n• Tools:  JIRA, Confluence, DAM, PIM, SRM, ERP',
+                help: 'Available commands:\n• help - Show this message\n• about - Learn more about me\n• skills - View my technical skills\n• projects - List my projects\n• experience - Work experience\n• education - Academic background\n• contact - Get my contact info\n• clear - Clear terminal\n• exit - Close terminal',
+                about: 'I\'m a problem solver who enjoys tackling complex challenges and wrestling with them until I find a solution. I\'m exploring different areas of tech to understand where my skills can have the greatest impact. I love continuous learning, experimenting with new technologies, and taking initiative in the projects I work on.',
+                skills: 'Technical Skills:\n• Advanced: Python (95%), SQL (90%), PL/SQL (85%)\n• Languages: C++ (70%), Java (65%)\n• Web: HTML5, CSS, Flask, Jinja\n• Tools: Git, JIRA, Confluence, DAM, PIM, SRM/SCM, ERP',
                 projects: 'Recent Projects:\n1. Andrea Oliva Architetto - Full website for architecture studio\n   Visit: andreaolivaarchitetto.netlify.app',
-                contact: 'Contact Information:\n• Email: riccardooliva2003@gmail.com\n• Phone: +39 339 143 0692\n• Location: Reggio nell\'Emilia, IT',
-                music: '🎵 Music Producer on SoundCloud\nGenre: Darkwave Chill & Experimental\nLatest track: "I Loved U"\nCheck out my profile: soundcloud.com/riccardo-oliva-134902660',
-                passions: 'Beyond Tech:\n🎵 Music Production - Creating darkwave experimental tracks"\n🍳 Cooking - Experimenting with all kinds of cuisine\n🤖 AI - Fascinated by artificial intelligence and its possibilities',
+                experience: 'Current Position:\nSoftware Engineer at Max Mara Fashion Group (Aug 2024 - Present)\n• Managing 30-80 tickets monthly across DAM, PIM, SRM platforms\n• Requirements gathering and technical documentation\n• Manual functional testing (~2 releases/month)\n• Python and PL/SQL development',
+                education: 'Education:\n• Bachelor in Computer Engineering - AI (2025-2029)\n  Università degli Studi "Guglielmo Marconi"\n• Software Developer Certification (2024)\n  Umana S.P.A\n• Diploma in Computer Science (2022)\n  I.I.S. Blaise Pascal',
+                contact: 'Contact Information:\n• Email: riccardooliva2003@gmail.com\n• Phone: +39 339 143 0692\n• Location: Reggio nell\'Emilia, IT\n• GitHub: github.com/riccardooliva',
                 clear: 'CLEAR',
                 exit: 'EXIT'
             };
@@ -1033,10 +773,10 @@
                 <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4" onClick={onClose}>
                     <div className="terminal w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
                         <div className="terminal-header">
-                            <div className="terminal-button red" onClick={onClose} role="button" tabIndex="0" aria-label="Close terminal"></div>
-                            <div className="terminal-button yellow" role="button" tabIndex="0" aria-label="Minimize terminal"></div>
-                            <div className="terminal-button green" role="button" tabIndex="0" aria-label="Maximize terminal"></div>
-                            <span className="text-sm text-gray-400 ml-4 code-font">riccardo@portfolio:~</span>
+                            <div className="terminal-button red" onClick={onClose}></div>
+                            <div className="terminal-button yellow"></div>
+                            <div className="terminal-button green"></div>
+                            <span className="text-xs md:text-sm text-gray-400 ml-2 md:ml-4 code-font truncate">riccardo@portfolio:~</span>
                         </div>
                         <div className="terminal-body code-font" ref={terminalBodyRef}>
                             {history.map((item, index) => (
@@ -1047,7 +787,7 @@
                                             <span style={{ color: 'var(--text-primary)' }}>{item.content}</span>
                                         </>
                                     ) : (
-                                        <pre className="terminal-output whitespace-pre-wrap">{item.content}</pre>
+                                        <pre className="terminal-output">{item.content}</pre>
                                     )}
                                 </div>
                             ))}
@@ -1073,13 +813,13 @@
         const CodeSnippet = () => {
             const [visibleLines, setVisibleLines] = useState([]);
             const codeLines = [
-                '<span style="color: #C678DD">class</span> <span style="color: #E5C07B">CreativeProblemSolver</span>:',
+                '<span style="color: #C678DD">class</span> <span style="color: #E5C07B">ProblemSolver</span>:',
                 '    <span style="color: #C678DD">def</span> <span style="color: #61AFEF">__init__</span>(<span style="color: #E06C75">self</span>):',
                 '        <span style="color: #E06C75">self</span>.name = <span style="color: #98C379">"Riccardo Oliva"</span>',
                 '        <span style="color: #E06C75">self</span>.role = <span style="color: #98C379">"Software Engineer"</span>',
-                '        <span style="color: #E06C75">self</span>.passions = [<span style="color: #98C379">"AI"</span>, <span style="color: #98C379">"Music"</span>, <span style="color: #98C379">"Cooking"</span>]',
-                '        <span style="color: #E06C75">self</span>.creativity_mode = <span style="color: #D19A66">True</span>',
-                '        '
+                '        <span style="color: #E06C75">self</span>.company = <span style="color: #98C379">"Max Mara Fashion Group"</span>',
+                '        <span style="color: #E06C75">self</span>.focus = [<span style="color: #98C379">"AI"</span>, <span style="color: #98C379">"Innovation"</span>]',
+                '        <span style="color: #E06C75">self</span>.learning = <span style="color: #D19A66">True</span>'
             ];
 
             useEffect(() => {
@@ -1091,14 +831,14 @@
             }, []);
 
             return (
-                <div className="rounded-lg p-6 border-2" style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
+                <div className="rounded-lg p-4 md:p-6 border-2" style={{ background: 'var(--bg-secondary)', borderColor: 'var(--border)' }}>
                     <div className="flex items-center gap-2 mb-4">
                         <div className="w-3 h-3 rounded-full bg-red-500"></div>
                         <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                         <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                        <span className="text-sm ml-2 code-font" style={{ color: 'var(--text-tertiary)' }}>problem_solver.py</span>
+                        <span className="text-xs md:text-sm ml-2 code-font" style={{ color: 'var(--text-tertiary)' }}>problem_solver.py</span>
                     </div>
-                    <pre className="code-font text-sm">
+                    <pre className="code-font text-xs md:text-sm overflow-x-auto">
                         {codeLines.map((line, index) => (
                             <div 
                                 key={index}
@@ -1148,8 +888,8 @@
             return (
                 <div ref={skillRef} className="skill-progress-container">
                     <div className="flex justify-between mb-2">
-                        <span className="font-medium">{skill.name}</span>
-                        <span style={{ color: 'var(--accent)' }}>{skill.level}%</span>
+                        <span className="font-medium text-sm md:text-base">{skill.name}</span>
+                        <span className="text-sm md:text-base" style={{ color: 'var(--accent)' }}>{skill.level}%</span>
                     </div>
                     <div className="skill-progress-bar">
                         <div 
@@ -1201,53 +941,18 @@
         const App = () => {
             const [activeSection, setActiveSection] = useState('home');
             const [terminalOpen, setTerminalOpen] = useState(false);
-            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
             const [formStatus, setFormStatus] = useState('');
             const [theme, setTheme] = useState('dark');
-            const [siteData, setSiteData] = useState(null);
-            const [loading, setLoading] = useState(true);
+            const [loading, setLoading] = useState(false);
 
-            // Load site data
-            useEffect(() => {
-                fetch('/data/site-data.json')
-                    .then(res => res.json())
-                    .then(data => {
-                        setSiteData(data);
-                        setLoading(false);
-                    })
-                    .catch(err => {
-                        console.error('Error loading site data:', err);
-                        // Fallback data
-                        setSiteData({
-                            projects: [{
-                                id: 1,
-                                title: "Andrea Oliva Architetto",
-                                description: "Built a complete website for architectural studio Andrea Oliva, showcasing projects and services.",
-                                category: "Web Development",
-                                technologies: ["HTML", "CSS", "Design"],
-                                link: "https://andreaolivaarchitetto.netlify.app",
-                                featured: true
-                            }],
-                            experiences: [],
-                            cooking: [],
-                            bio: {
-                                about: "I'm a Software Engineer at Max Mara Fashion Group...",
-                                tagline: "Creative problem-solver at Max Mara Fashion Group."
-                            },
-                            skills: {
-                                skills: [
-                                    { name: "Python", level: 95 },
-                                    { name: "SQL", level: 90 },
-                                    { name: "PL/SQL", level: 85 },
-                                    { name: "HTML5 & CSS", level: 80 },
-                                    { name: "C++", level: 70 },
-                                    { name: "Java", level: 65 }
-                                ]
-                            }
-                        });
-                        setLoading(false);
-                    });
-            }, []);
+            const skillsData = [
+                { name: "Python", level: 95 },
+                { name: "SQL", level: 90 },
+                { name: "PL/SQL", level: 85 },
+                { name: "HTML5 & CSS", level: 80 },
+                { name: "C++", level: 70 },
+                { name: "Java", level: 65 }
+            ];
 
             useEffect(() => {
                 document.documentElement.setAttribute('data-theme', theme);
@@ -1263,18 +968,15 @@
                         e.preventDefault();
                         setTerminalOpen(true);
                     }
-                    if (e.key === 'Escape' && mobileMenuOpen) {
-                        setMobileMenuOpen(false);
-                    }
                 };
 
                 window.addEventListener('keydown', handleKeyPress);
                 return () => window.removeEventListener('keydown', handleKeyPress);
-            }, [mobileMenuOpen]);
+            }, []);
 
             useEffect(() => {
                 const handleScroll = () => {
-                    const sections = ['home', 'about', 'projects', 'experience', 'passions', 'contact'];
+                    const sections = ['home', 'about', 'projects', 'experience', 'contact'];
                     const scrollPosition = window.scrollY + 100;
 
                     for (const section of sections) {
@@ -1299,32 +1001,8 @@
                 const element = document.getElementById(sectionId);
                 if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
-                    setMobileMenuOpen(false);
                 }
             };
-
-            const downloadCV = () => {
-                const link = document.createElement('a');
-                link.href = 'Curriculum_Oliva_Riccardo.pdf';
-                link.download = 'Riccardo_Oliva_CV.pdf';
-                link.click();
-            };
-
-            if (loading) {
-                return (
-                    <div className="min-h-screen flex items-center justify-center">
-                        <div className="text-center">
-                            <div className="loading-spinner mx-auto mb-4"></div>
-                            <p style={{ color: 'var(--text-secondary)' }}>Loading...</p>
-                        </div>
-                    </div>
-                );
-            }
-
-            const projectsData = siteData?.projects || [];
-            const cookingPhotos = siteData?.cooking || [];
-            const skillsData = siteData?.skills?.skills || [];
-            const bioData = siteData?.bio || {};
 
             return (
                 <>
@@ -1337,18 +1015,18 @@
                         onClick={toggleTheme}
                         aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
                     >
-                        <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} text-2xl`} style={{ color: 'var(--accent)' }}></i>
+                        <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} text-xl md:text-2xl`} style={{ color: 'var(--accent)' }}></i>
                     </button>
 
                     {/* Terminal Hint */}
                     <div className="terminal-hint">
-                        <i className="fas fa-terminal" style={{ color: 'var(--accent)' }}></i>
+                        <i className="fas fa-terminal text-sm md:text-base" style={{ color: 'var(--accent)' }}></i>
                         <span className="code-font" style={{ color: 'var(--text-primary)' }}>Press <kbd>/</kbd> for terminal</span>
                     </div>
 
-                    {/* Floating Menu (Desktop) */}
+                    {/* Floating Menu (Desktop only) */}
                     <nav className="floating-menu" aria-label="Section navigation">
-                        {['home', 'about', 'projects','experience', 'passions',  'contact'].map((section) => (
+                        {['home', 'about', 'projects', 'experience', 'contact'].map((section) => (
                             <div
                                 key={section}
                                 className={`nav-dot ${activeSection === section ? 'active' : ''}`}
@@ -1362,14 +1040,13 @@
                         ))}
                     </nav>
 
-                    {/* Mobile Menu (Bottom) */}
+                    {/* Mobile Menu */}
                     <nav className="mobile-menu" aria-label="Mobile navigation">
                         {[
                             { id: 'home', icon: 'fa-home', label: 'Home' },
                             { id: 'about', icon: 'fa-user', label: 'About' },
                             { id: 'projects', icon: 'fa-code', label: 'Projects' },
                             { id: 'experience', icon: 'fa-briefcase', label: 'Work' },
-                            { id: 'passions', icon: 'fa-heart', label: 'Passions' },     
                             { id: 'contact', icon: 'fa-envelope', label: 'Contact' }
                         ].map((item) => (
                             <div
@@ -1389,38 +1066,35 @@
 
                     <main id="main-content">
                         {/* Hero Section */}
-                        <section id="home" className="min-h-screen flex items-center justify-center px-6 relative">
-                            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-12 items-center">
+                        <section id="home" className="min-h-screen flex items-center justify-center section-padding">
+                            <div className="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
                                 <div className="fade-in-up">
-                                    <div className="text-sm mb-4 code-font" style={{ color: 'var(--text-tertiary)' }}>
+                                    <div className="text-xs md:text-sm mb-4 code-font" style={{ color: 'var(--text-tertiary)' }}>
                                         <span style={{ color: 'var(--accent)' }}>~/portfolio</span> $ whoami
                                     </div>
-                                    <h1 className="text-5xl md:text-6xl font-bold mb-4">
+                                    <h1 className="font-bold mb-4">
                                         Riccardo <span className="gradient-text">Oliva</span>
                                     </h1>
-                                    <p className="text-xl md:text-2xl mb-6" style={{ color: 'var(--text-secondary)' }}>
+                                    <p className="text-lg md:text-xl lg:text-2xl mb-4 md:mb-6" style={{ color: 'var(--text-secondary)' }}>
                                         Software Engineer & AI Student
                                     </p>
-                                    <p className="mb-8 max-w-lg leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
-                                        {bioData.tagline || "Creative problem-solver at Max Mara Fashion Group. Fascinated by AI, passionate about music production and cooking."}
+                                    <p className="mb-6 md:mb-8 max-w-lg leading-relaxed text-sm md:text-base" style={{ color: 'var(--text-tertiary)' }}>
+                                        Creative problem-solver at Max Mara Fashion Group, exploring the intersection of technology and innovation.
                                     </p>
-                                    <div className="flex flex-wrap gap-4">
+                                    <div className="flex flex-wrap gap-3 md:gap-4">
                                         <button onClick={() => scrollToSection('projects')} className="btn-primary">
                                             View Projects
                                         </button>
-                                        <button onClick={downloadCV} className="btn-secondary">
-                                            <i className="fas fa-download mr-2"></i>Download CV
-                                        </button>
+                                        <a href="https://github.com/riccardooliva" target="_blank" rel="noopener noreferrer" className="btn-secondary">
+                                            <i className="fab fa-github mr-2"></i>GitHub
+                                        </a>
                                     </div>
-                                    <div className="mt-8 flex gap-4 flex-wrap">
-                                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-icon text-2xl" style={{ color: 'var(--text-secondary)' }} aria-label="GitHub Profile">
+                                    <div className="mt-6 md:mt-8 flex gap-4 flex-wrap">
+                                        <a href="https://github.com/riccardooliva" target="_blank" rel="noopener noreferrer" className="social-icon text-2xl" style={{ color: 'var(--text-secondary)' }} aria-label="GitHub Profile">
                                             <i className="fab fa-github"></i>
                                         </a>
                                         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon text-2xl" style={{ color: 'var(--text-secondary)' }} aria-label="LinkedIn Profile">
                                             <i className="fab fa-linkedin"></i>
-                                        </a>
-                                        <a href="https://soundcloud.com/riccardo-oliva-134902660" target="_blank" rel="noopener noreferrer" className="social-icon text-2xl" style={{ color: 'var(--text-secondary)' }} aria-label="SoundCloud Profile">
-                                            <i className="fab fa-soundcloud"></i>
                                         </a>
                                         <a href="mailto:riccardooliva2003@gmail.com" className="social-icon text-2xl" style={{ color: 'var(--text-secondary)' }} aria-label="Email">
                                             <i className="fas fa-envelope"></i>
@@ -1434,32 +1108,37 @@
                         </section>
 
                         {/* About Section */}
-                        <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20">
+                        <section id="about" className="min-h-screen flex items-center justify-center section-padding">
                             <div className="max-w-6xl w-full mx-auto">
-                                <h2 className="text-4xl font-bold mb-12 text-center">
+                                <h2 className="font-bold mb-8 md:mb-12 text-center">
                                     About <span className="gradient-text">Me</span>
                                 </h2>
-                                <div className="grid md:grid-cols-2 gap-12">
+                                <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                                     <div>
-                                        <h3 className="text-2xl font-semibold mb-4">Who I Am</h3>
-                                        <div className="mb-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }} dangerouslySetInnerHTML={{ __html: bioData.about?.replace(/\n/g, '<br/>') || "I'm a Software Engineer at Max Mara Fashion Group..." }}>
+                                        <h3 className="font-semibold mb-4">Who I Am</h3>
+                                        <div className="mb-4 leading-relaxed text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
+                                            <p className="mb-4">
+                                                I'm a problem solver: I enjoy tackling complex challenges and wrestling with them until I find a solution. I'm exploring different areas of tech to understand where my skills can have the greatest impact.
+                                            </p>
+                                            <p className="mb-4">
+                                                I love continuous learning, experimenting with new technologies, and taking initiative in the projects I work on.
+                                            </p>
+                                            <p>
+                                                Outside the office, I'm passionate about cooking and music.
+                                            </p>
                                         </div>
                                     </div>
                                     <div>
-                                        <h3 className="text-2xl font-semibold mb-6">Skills & Proficiency</h3>
-                                        {skillsData.length > 0 ? (
-                                            skillsData.map((skill, index) => (
-                                                <SkillProgressBar 
-                                                    key={skill.name} 
-                                                    skill={skill} 
-                                                    delay={index * 100}
-                                                />
-                                            ))
-                                        ) : (
-                                            <p style={{ color: 'var(--text-secondary)' }}>Add skills via CMS</p>
-                                        )}
+                                        <h3 className="font-semibold mb-4 md:mb-6">Skills & Proficiency</h3>
+                                        {skillsData.map((skill, index) => (
+                                            <SkillProgressBar 
+                                                key={skill.name} 
+                                                skill={skill} 
+                                                delay={index * 100}
+                                            />
+                                        ))}
                                         <div className="mt-6">
-                                            <h4 className="text-lg font-medium mb-3" style={{ color: 'var(--text-secondary)' }}>Tools & Platforms</h4>
+                                            <h4 className="text-base md:text-lg font-medium mb-3" style={{ color: 'var(--text-secondary)' }}>Tools & Platforms</h4>
                                             <div className="flex flex-wrap gap-2">
                                                 {['Git', 'JIRA', 'Confluence', 'DAM', 'PIM', 'SRM', 'ERP', 'Flask', 'Jinja'].map(skill => (
                                                     <span key={skill} className="skill-badge">{skill}</span>
@@ -1472,262 +1151,124 @@
                         </section>
 
                         {/* Projects Section */}
-                        <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20">
+                        <section id="projects" className="min-h-screen flex items-center justify-center section-padding">
                             <div className="max-w-6xl w-full mx-auto">
-                                <h2 className="text-4xl font-bold mb-12 text-center">
+                                <h2 className="font-bold mb-8 md:mb-12 text-center">
                                     My <span className="gradient-text">Projects</span>
                                 </h2>
 
-                                {projectsData.length > 0 ? (
-                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                        {projectsData.map((project) => (
-                                            <div
-                                                key={project.id}
-                                                className="project-card rounded-lg p-8"
-                                                tabIndex="0"
-                                            >
-                                                <div className="project-screenshot">
-                                                    {project.screenshot ? (
-                                                        <img src={project.screenshot} alt={project.title} />
-                                                    ) : (
-                                                        <div className="project-screenshot-placeholder">
-                                                            <i className="fas fa-image"></i>
-                                                            <p className="text-sm">Add screenshot via CMS</p>
-                                                        </div>
-                                                    )}
-                                                </div>
-
-                                                {project.featured && (
-                                                    <span className="inline-block px-3 py-1 text-white text-xs rounded-full mb-4" style={{ background: 'var(--accent)' }}>
-                                                        Featured
-                                                    </span>
-                                                )}
-                                                <h3 className="text-2xl font-semibold mb-3">{project.title}</h3>
-                                                <p className="mb-4 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                                    {project.description}
-                                                </p>
-                                                <div className="flex flex-wrap gap-2 mb-4">
-                                                    {project.technologies?.map(tech => (
-                                                        <span key={tech} className="text-xs px-3 py-1 rounded" style={{ background: 'var(--bg-tertiary)', color: 'var(--accent)' }}>
-                                                            {tech}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                                <div className="text-sm mb-4" style={{ color: 'var(--text-tertiary)' }}>
-                                                    <i className="fas fa-tag mr-2"></i>{project.category}
-                                                </div>
-                                                {project.link && (
-                                                    <a 
-                                                        href={project.link} 
-                                                        target="_blank" 
-                                                        rel="noopener noreferrer"
-                                                        className="btn-primary inline-block"
-                                                    >
-                                                        <i className="fas fa-external-link-alt mr-2"></i>Visit Website
-                                                    </a>
-                                                )}
-                                            </div>
-                                        ))}
+                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                                    <div className="project-card rounded-lg p-6 md:p-8">
+                                        <span className="inline-block px-3 py-1 text-white text-xs rounded-full mb-4" style={{ background: 'var(--accent)' }}>
+                                            Featured
+                                        </span>
+                                        <h3 className="text-xl md:text-2xl font-semibold mb-3">Andrea Oliva Architetto</h3>
+                                        <p className="mb-4 leading-relaxed text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
+                                            Built a complete website for architectural studio Andrea Oliva, showcasing projects and services. My first major web development project.
+                                        </p>
+                                        <div className="flex flex-wrap gap-2 mb-4">
+                                            {['HTML', 'CSS', 'Design'].map(tech => (
+                                                <span key={tech} className="text-xs px-3 py-1 rounded" style={{ background: 'var(--bg-tertiary)', color: 'var(--accent)' }}>
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <a 
+                                            href="https://andreaolivaarchitetto.netlify.app" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer"
+                                            className="btn-primary inline-block"
+                                        >
+                                            <i className="fas fa-external-link-alt mr-2"></i>Visit Website
+                                        </a>
                                     </div>
-                                ) : (
-                                    <div className="text-center p-12 rounded-lg" style={{ background: 'var(--card-bg)', border: '2px solid var(--border)' }}>
-                                        <i className="fas fa-folder-open text-5xl mb-4" style={{ color: 'var(--accent)', opacity: 0.5 }}></i>
-                                        <p style={{ color: 'var(--text-secondary)' }}>No projects yet. Add some via Netlify CMS!</p>
-                                    </div>
-                                )}
+                                </div>
                             </div>
                         </section>
 
-                        
                         {/* Experience Section */}
-                        <section id="experience" className="min-h-screen flex items-center justify-center px-6 py-20">
+                        <section id="experience" className="min-h-screen flex items-center justify-center section-padding">
                             <div className="max-w-6xl w-full mx-auto">
-                                <h2 className="text-4xl font-bold mb-12 text-center">
+                                <h2 className="font-bold mb-8 md:mb-12 text-center">
                                     Experience & <span className="gradient-text">Education</span>
                                 </h2>
 
-                                <div className="grid md:grid-cols-2 gap-8 mb-12">
+                                <div className="grid md:grid-cols-2 gap-8 mb-8 md:mb-12">
                                     <div>
-                                        <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                                            <i className="fas fa-briefcase mr-3" style={{ color: 'var(--accent)' }}></i>
+                                        <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 flex items-center">
+                                            <i className="fas fa-briefcase mr-3 text-lg md:text-xl" style={{ color: 'var(--accent)' }}></i>
                                             Work Experience
                                         </h3>
                                         <div className="space-y-6">
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--accent)' }}>August 2024 - Present</div>
-                                                <h4 className="text-xl font-semibold mb-2">Software Engineer</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
-                                                <ul className="text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
-                                                    <li>• Managed DAM, PIM, SRM systems</li>
-                                                    <li>• Software testing and digital project management</li>
-                                                    <li>• Tools: PL/SQL, Confluence, JIRA, Python</li>
+                                            <div className="pl-4 md:pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
+                                                <div className="text-xs md:text-sm mb-1" style={{ color: 'var(--accent)' }}>August 2024 - Present</div>
+                                                <h4 className="text-lg md:text-xl font-semibold mb-2">Software Engineer</h4>
+                                                <p className="mb-2 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
+                                                <ul className="text-xs md:text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
+                                                    <li>• Manage 30-80 tickets monthly across DAM, PIM, SRM, and B2B/B2C platforms</li>
+                                                    <li>• Gather and translate business requirements into technical specifications</li>
+                                                    <li>• Execute manual functional testing (~2 releases/month)</li>
+                                                    <li>• Provide technical support to IT and business users</li>
+                                                    <li>• Python and PL/SQL development for data integration</li>
+                                                    <li>• Selected to lead 2 AI-focused projects in 2025</li>
                                                 </ul>
                                             </div>
 
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2022 - August 2022</div>
-                                                <h4 className="text-xl font-semibold mb-2">Software Programmer Intern</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
-                                                <ul className="text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
-                                                    <li>• Developed ERP modules using Python</li>
-                                                    <li>• Internal framework development</li>
+                                            <div className="pl-4 md:pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
+                                                <div className="text-xs md:text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2022 - August 2022</div>
+                                                <h4 className="text-lg md:text-xl font-semibold mb-2">Software Programming Intern</h4>
+                                                <p className="mb-2 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Max Mara Fashion Group</p>
+                                                <ul className="text-xs md:text-sm space-y-1" style={{ color: 'var(--text-tertiary)' }}>
+                                                    <li>• Developed Python automation tool for ERP integration</li>
+                                                    <li>• Eliminated manual data entry processes</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div>
-                                        <h3 className="text-2xl font-semibold mb-6 flex items-center">
-                                            <i className="fas fa-graduation-cap mr-3" style={{ color: 'var(--accent)' }}></i>
+                                        <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6 flex items-center">
+                                            <i className="fas fa-graduation-cap mr-3 text-lg md:text-xl" style={{ color: 'var(--accent)' }}></i>
                                             Education
                                         </h3>
                                         <div className="space-y-6">
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--accent)' }}>March 2025 - April 2029 (Expected)</div>
-                                                <h4 className="text-xl font-semibold mb-2">Bachelor's Degree</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Computer Engineering - AI</p>
-                                                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Università degli Studi "Guglielmo Marconi"</p>
+                                            <div className="pl-4 md:pl-6" style={{ borderLeft: `3px solid var(--accent)` }}>
+                                                <div className="text-xs md:text-sm mb-1" style={{ color: 'var(--accent)' }}>March 2025 - April 2029 (Expected)</div>
+                                                <h4 className="text-lg md:text-xl font-semibold mb-2">Bachelor's Degree</h4>
+                                                <p className="mb-2 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Computer Engineering - AI</p>
+                                                <p className="text-xs md:text-sm" style={{ color: 'var(--text-tertiary)' }}>Università degli Studi "Guglielmo Marconi"</p>
                                             </div>
 
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2024 - August 2024</div>
-                                                <h4 className="text-xl font-semibold mb-2">Software Developer Certification</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Umana S.P.A</p>
+                                            <div className="pl-4 md:pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
+                                                <div className="text-xs md:text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>July 2024 - August 2024</div>
+                                                <h4 className="text-lg md:text-xl font-semibold mb-2">Software Developer Certification</h4>
+                                                <p className="mb-2 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Umana S.P.A</p>
                                             </div>
 
-                                            <div className="pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
-                                                <div className="text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>2018 - 2023</div>
-                                                <h4 className="text-xl font-semibold mb-2">Diploma</h4>
-                                                <p className="mb-2" style={{ color: 'var(--text-secondary)' }}>Computer Science & Telecommunications</p>
-                                                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>I.I.S. Blaise Pascal</p>
+                                            <div className="pl-4 md:pl-6" style={{ borderLeft: `3px solid var(--border)` }}>
+                                                <div className="text-xs md:text-sm mb-1" style={{ color: 'var(--text-secondary)' }}>Graduated 2022</div>
+                                                <h4 className="text-lg md:text-xl font-semibold mb-2">Diploma</h4>
+                                                <p className="mb-2 text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>Computer Science & Telecommunications</p>
+                                                <p className="text-xs md:text-sm" style={{ color: 'var(--text-tertiary)' }}>I.I.S. Blaise Pascal</p>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="text-center rounded-lg p-8" style={{ background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(13, 148, 136, 0.1) 100%)', border: '2px solid var(--accent)' }}>
-                                    <h3 className="text-2xl font-semibold mb-4">Download Full CV</h3>
-                                    <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>Get the complete PDF version of my curriculum vitae</p>
-                                    <button onClick={downloadCV} className="btn-primary">
-                                        <i className="fas fa-file-pdf mr-2"></i>Download PDF
-                                    </button>
-                                </div>
-                            </div>
-                        </section>
-
-                        {/* Passions Section */}
-                        <section id="passions" className="min-h-screen flex items-center justify-center px-6 py-20">
-                            <div className="max-w-6xl w-full mx-auto">
-                                <h2 className="text-4xl font-bold mb-12 text-center">
-                                    My <span className="gradient-text">Passions</span>
-                                </h2>
-
-                                <div className="grid md:grid-cols-2 gap-8">
-                                    <div className="music-card">
-                                        <div className="flex items-center gap-4 mb-6">
-                                            <div className="text-5xl">🎵</div>
-                                            <div>
-                                                <h3 className="text-2xl font-semibold">Music Production</h3>
-                                                <p style={{ color: 'var(--text-secondary)' }}>Darkwave Chill & Experimental</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                            I create atmospheric music blending darkwave aesthetics with chill vibes. 
-                                            My latest track "I Loved U" explores emotional soundscapes through experimental production.
-                                        </p>
-
-                                        <div className="flex items-end justify-center gap-2 h-20 mb-6">
-                                            {[...Array(7)].map((_, i) => (
-                                                <div key={i} className="waveform-bar"></div>
-                                            ))}
-                                        </div>
-
-                                        <div className="mb-4 rounded-lg overflow-hidden" style={{ border: '2px solid var(--border)' }}>
-                                            <iframe 
-                                                width="100%" 
-                                                height="166" 
-                                                scrolling="no" 
-                                                frameBorder="no" 
-                                                allow="autoplay"
-                                                src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/riccardo-oliva-134902660/i-loved-u&color=%2314b8a6&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"
-                                                title="I Loved U - SoundCloud Player"
-                                            ></iframe>
-                                        </div>
-
-                                        <a 
-                                            href="https://soundcloud.com/riccardo-oliva-134902660" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer"
-                                            className="btn-primary w-full text-center inline-block"
-                                        >
-                                            <i className="fab fa-soundcloud mr-2"></i>Visit My SoundCloud
-                                        </a>
-                                    </div>
-
-                                    <div className="music-card">
-                                        <div className="flex items-center gap-4 mb-6">
-                                            <div className="text-5xl">👨‍🍳</div>
-                                            <div>
-                                                <h3 className="text-2xl font-semibold">Cooking</h3>
-                                                <p style={{ color: 'var(--text-secondary)' }}>My Culinary Creations</p>
-                                            </div>
-                                        </div>
-                                        
-                                        <p className="mb-6 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                            I love experimenting in the kitchen, trying new recipes and cuisines from around the world. 
-                                            Here are some of my favorite dishes I've prepared.
-                                        </p>
-
-                                        {cookingPhotos.length > 0 ? (
-                                            <div className="cooking-gallery mb-6">
-                                                {cookingPhotos.map((photo) => (
-                                                    <div key={photo.id} className="cooking-photo">
-                                                        {photo.photo ? (
-                                                            <img src={photo.photo} alt={photo.alt} />
-                                                        ) : (
-                                                            <div className="cooking-photo-placeholder">
-                                                                <i className="fas fa-utensils"></i>
-                                                                <p className="text-xs text-center px-2">Add via CMS</p>
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        ) : (
-                                            <div className="p-8 rounded-lg text-center mb-6" style={{ background: 'var(--bg-secondary)', border: '2px solid var(--border)' }}>
-                                                <i className="fas fa-utensils text-4xl mb-3" style={{ color: 'var(--accent)', opacity: 0.5 }}></i>
-                                                <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                                                    No cooking photos yet. Add them via Netlify CMS!
-                                                </p>
-                                            </div>
-                                        )}
-
-                                        <div className="p-4 rounded-lg text-center" style={{ background: 'var(--bg-secondary)', border: '2px solid var(--border)' }}>
-                                            <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                                                <i className="fas fa-info-circle mr-2"></i>
-                                                Photos can be added via Netlify CMS
-                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-
-                        {/* Contact Section with Netlify Forms */}
-                        <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20">
+                        {/* Contact Section */}
+                        <section id="contact" className="min-h-screen flex items-center justify-center section-padding">
                             <div className="max-w-4xl w-full mx-auto">
-                                <h2 className="text-4xl font-bold mb-12 text-center">
+                                <h2 className="font-bold mb-8 md:mb-12 text-center">
                                     Get In <span className="gradient-text">Touch</span>
                                 </h2>
 
-                                <div className="grid md:grid-cols-2 gap-12">
+                                <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                                     <div>
-                                        <h3 className="text-2xl font-semibold mb-6">Let's Connect</h3>
-                                        <p className="mb-8 leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                                            I'm always open to discussing new projects, creative ideas, or opportunities 
-                                            to be part of your vision. Feel free to reach out!
+                                        <h3 className="text-xl md:text-2xl font-semibold mb-4 md:mb-6">Let's Connect</h3>
+                                        <p className="mb-6 md:mb-8 leading-relaxed text-sm md:text-base" style={{ color: 'var(--text-secondary)' }}>
+                                            I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!
                                         </p>
 
                                         <div className="space-y-4">
@@ -1736,8 +1277,8 @@
                                                     <i className="fas fa-envelope" style={{ color: 'var(--accent)' }}></i>
                                                 </div>
                                                 <div className="overflow-hidden">
-                                                    <div className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Email</div>
-                                                    <a href="mailto:riccardooliva2003@gmail.com" className="hover:underline break-all" style={{ color: 'var(--text-primary)' }}>
+                                                    <div className="text-xs md:text-sm" style={{ color: 'var(--text-tertiary)' }}>Email</div>
+                                                    <a href="mailto:riccardooliva2003@gmail.com" className="hover:underline break-all text-sm md:text-base" style={{ color: 'var(--text-primary)' }}>
                                                         riccardooliva2003@gmail.com
                                                     </a>
                                                 </div>
@@ -1748,8 +1289,8 @@
                                                     <i className="fas fa-phone" style={{ color: 'var(--accent)' }}></i>
                                                 </div>
                                                 <div>
-                                                    <div className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Phone</div>
-                                                    <a href="tel:+393391430692" className="hover:underline" style={{ color: 'var(--text-primary)' }}>
+                                                    <div className="text-xs md:text-sm" style={{ color: 'var(--text-tertiary)' }}>Phone</div>
+                                                    <a href="tel:+393391430692" className="hover:underline text-sm md:text-base" style={{ color: 'var(--text-primary)' }}>
                                                         +39 339 143 0692
                                                     </a>
                                                 </div>
@@ -1760,37 +1301,35 @@
                                                     <i className="fas fa-map-marker-alt" style={{ color: 'var(--accent)' }}></i>
                                                 </div>
                                                 <div>
-                                                    <div className="text-sm" style={{ color: 'var(--text-tertiary)' }}>Location</div>
-                                                    <div style={{ color: 'var(--text-primary)' }}>Reggio nell'Emilia, IT</div>
+                                                    <div className="text-xs md:text-sm" style={{ color: 'var(--text-tertiary)' }}>Location</div>
+                                                    <div className="text-sm md:text-base" style={{ color: 'var(--text-primary)' }}>Reggio nell'Emilia, IT</div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div className="mt-8 flex gap-4 flex-wrap">
-                                            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-lg flex items-center justify-center transition" style={{ background: 'var(--bg-tertiary)' }} aria-label="GitHub">
-                                                <i className="fab fa-github"></i>
+                                        <div className="mt-6 md:mt-8 flex gap-4 flex-wrap">
+                                            <a href="https://github.com/riccardooliva" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-lg flex items-center justify-center transition" style={{ background: 'var(--bg-tertiary)' }} aria-label="GitHub">
+                                                <i className="fab fa-github text-xl"></i>
                                             </a>
                                             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-lg flex items-center justify-center transition" style={{ background: 'var(--bg-tertiary)' }} aria-label="LinkedIn">
-                                                <i className="fab fa-linkedin"></i>
-                                            </a>
-                                            <a href="https://soundcloud.com/riccardo-oliva-134902660" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-lg flex items-center justify-center transition" style={{ background: 'var(--bg-tertiary)' }} aria-label="SoundCloud">
-                                                <i className="fab fa-soundcloud"></i>
+                                                <i className="fab fa-linkedin text-xl"></i>
                                             </a>
                                             <a href="mailto:riccardooliva2003@gmail.com" className="w-12 h-12 rounded-lg flex items-center justify-center transition" style={{ background: 'var(--bg-tertiary)' }} aria-label="Email">
-                                                <i className="fas fa-envelope"></i>
+                                                <i className="fas fa-envelope text-xl"></i>
                                             </a>
                                         </div>
                                     </div>
 
                                     <div>
-                                        {/* Netlify Forms */}
                                         <form 
-                                            netlify
                                             name="contact" 
                                             method="POST" 
                                             data-netlify="true"
                                             data-netlify-honeypot="bot-field"
-                                            onSubmit={() => setFormStatus('✅ Message sent!')}
+                                            onSubmit={(e) => {
+                                                e.preventDefault();
+                                                setFormStatus('✅ Message sent! I\'ll get back to you soon.');
+                                            }}
                                             className="space-y-4"
                                         >
                                             <input type="hidden" name="form-name" value="contact" />
@@ -1799,13 +1338,13 @@
                                             </p>
 
                                             <div>
-                                                <label htmlFor="name" className="block text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>Name</label>
+                                                <label htmlFor="name" className="block text-xs md:text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>Name</label>
                                                 <input
                                                     type="text"
                                                     id="name"
                                                     name="name"
                                                     required
-                                                    className="w-full rounded-lg px-4 py-3 focus:outline-none transition"
+                                                    className="w-full rounded-lg px-4 py-3 focus:outline-none transition text-sm md:text-base"
                                                     style={{ 
                                                         background: 'var(--bg-secondary)', 
                                                         border: '2px solid var(--border)', 
@@ -1815,13 +1354,13 @@
                                             </div>
 
                                             <div>
-                                                <label htmlFor="email" className="block text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>Email</label>
+                                                <label htmlFor="email" className="block text-xs md:text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>Email</label>
                                                 <input
                                                     type="email"
                                                     id="email"
                                                     name="email"
                                                     required
-                                                    className="w-full rounded-lg px-4 py-3 focus:outline-none transition"
+                                                    className="w-full rounded-lg px-4 py-3 focus:outline-none transition text-sm md:text-base"
                                                     style={{ 
                                                         background: 'var(--bg-secondary)', 
                                                         border: '2px solid var(--border)', 
@@ -1831,13 +1370,13 @@
                                             </div>
 
                                             <div>
-                                                <label htmlFor="message" className="block text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>Message</label>
+                                                <label htmlFor="message" className="block text-xs md:text-sm mb-2" style={{ color: 'var(--text-secondary)' }}>Message</label>
                                                 <textarea
                                                     id="message"
                                                     name="message"
                                                     required
                                                     rows="5"
-                                                    className="w-full rounded-lg px-4 py-3 focus:outline-none transition resize-none"
+                                                    className="w-full rounded-lg px-4 py-3 focus:outline-none transition resize-none text-sm md:text-base"
                                                     style={{ 
                                                         background: 'var(--bg-secondary)', 
                                                         border: '2px solid var(--border)', 
@@ -1851,7 +1390,7 @@
                                             </button>
 
                                             {formStatus && (
-                                                <div className="text-center text-sm p-3 rounded-lg" style={{ background: 'rgba(20, 184, 166, 0.2)', color: 'var(--accent)' }}>
+                                                <div className="text-center text-xs md:text-sm p-3 rounded-lg" style={{ background: 'rgba(20, 184, 166, 0.2)', color: 'var(--accent)' }}>
                                                     {formStatus}
                                                 </div>
                                             )}
@@ -1861,11 +1400,11 @@
                             </div>
                         </section>
 
-                        <footer className="py-8 px-6 pb-20 md:pb-8" style={{ background: 'var(--bg-primary)', borderTop: '2px solid var(--border)' }}>
-                            <div className="max-w-6xl mx-auto text-center text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                                <p className="mb-2">© 2025 Riccardo Oliva. Built with AI assistance from Claude by Anthropic.</p>
+                        <footer className="py-6 md:py-8 px-6 pb-20 md:pb-8" style={{ background: 'var(--bg-primary)', borderTop: '2px solid var(--border)' }}>
+                            <div className="max-w-6xl mx-auto text-center text-xs md:text-sm" style={{ color: 'var(--text-tertiary)' }}>
+                                <p className="mb-2">© 2025 Riccardo Oliva. All rights reserved.</p>
                                 <p className="code-font text-xs">
-                                    <i className="fas fa-terminal mr-2"></i>Press / to open terminal • Made with creativity and innovation
+                                    <i className="fas fa-code mr-2"></i>Built with passion and innovation
                                 </p>
                             </div>
                         </footer>
@@ -1875,19 +1414,6 @@
         };
 
         ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
-    
-    <!-- Netlify Identity redirect script -->
-    <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
-                    });
-                }
-            });
-        }
     </script>
 </body>
 </html>

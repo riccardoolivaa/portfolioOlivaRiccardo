@@ -115,6 +115,14 @@ function parseProjects() {
     }
   });
 
+  // Ordina per order se presente, altrimenti per featured
+  projects.sort((a, b) => {
+    if (a.order && b.order) return a.order - b.order;
+    if (a.featured && !b.featured) return -1;
+    if (!a.featured && b.featured) return 1;
+    return 0;
+  });
+
   console.log(`✅ Parsed ${projects.length} projects`);
   return projects;
 }
@@ -152,34 +160,6 @@ function parseExperiences() {
   return experiences;
 }
 
-// Funzione per leggere e parsare foto cucina
-function parseCooking() {
-  const cookingDir = './content/cooking';
-  const cooking = [];
-
-  if (!fs.existsSync(cookingDir)) {
-    console.warn('⚠️  Cooking directory not found');
-    return cooking;
-  }
-
-  fs.readdirSync(cookingDir).forEach(file => {
-    if (file.endsWith('.md')) {
-      const filePath = path.join(cookingDir, file);
-      const content = fs.readFileSync(filePath, 'utf8');
-      const { data } = parseFrontmatter(content);
-      
-      data.id = path.basename(file, '.md');
-      cooking.push(data);
-    }
-  });
-
-  // Ordina per order
-  cooking.sort((a, b) => (a.order || 999) - (b.order || 999));
-
-  console.log(`✅ Parsed ${cooking.length} cooking photos`);
-  return cooking;
-}
-
 // Funzione per leggere bio
 function parseBio() {
   const bioPath = './content/bio.md';
@@ -214,12 +194,11 @@ function parseSkills() {
 
 // Main build function
 function buildData() {
-  console.log('🚀 Building site data...\n');
+  console.log('🚀 Building professional portfolio data...\n');
 
   const siteData = {
     projects: parseProjects(),
     experiences: parseExperiences(),
-    cooking: parseCooking(),
     bio: parseBio(),
     skills: parseSkills(),
     buildDate: new Date().toISOString()
@@ -236,10 +215,9 @@ function buildData() {
   fs.writeFileSync(outputPath, JSON.stringify(siteData, null, 2));
   
   console.log(`\n✅ Build complete! Data written to ${outputPath}`);
-  console.log(`📊 Summary:
+  console.log(`📊 Professional Portfolio Summary:
   - Projects: ${siteData.projects.length}
-  - Experiences: ${siteData.experiences.length}
-  - Cooking photos: ${siteData.cooking.length}
+  - Work Experiences: ${siteData.experiences.length}
   - Skills: ${siteData.skills.skills.length}
   `);
 }
