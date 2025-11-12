@@ -830,7 +830,7 @@
 
             const commands = {
                 help: 'Available commands:\n• help - Show this message\n• about - Learn more about me\n• skills - View my technical skills\n• projects - List my projects\n• experience - Work experience\n• education - Academic background\n• contact - Get my contact info\n• clear - Clear terminal\n• exit - Close terminal',
-                about: siteData?.bio?.about || 'I\'m a problem solver who enjoys tackling complex challenges and wrestling with them until I find a solution.',
+                about: siteData?.bio?.about || `I enjoy tackling complex challenges and wrestling with them until I find a solution. I'm exploring different areas of tech to understand where my skills can have the greatest impact. I love continuous learning, experimenting with new technologies, and taking initiative in the projects I work on. Outside the office, I'm passionate about cooking and music.`,
                 skills: buildSkillsOutput(),
                 projects: buildProjectsOutput(),
                 experience: buildExperienceOutput(),
@@ -924,7 +924,6 @@
                 '        <span style="color: #E06C75">self</span>.name = <span style="color: #98C379">"Riccardo Oliva"</span>',
                 '        <span style="color: #E06C75">self</span>.role = <span style="color: #98C379">"Software Engineer"</span>',
                 '        <span style="color: #E06C75">self</span>.company = <span style="color: #98C379">"Max Mara Fashion Group"</span>',
-                '        <span style="color: #E06C75">self</span>.focus = [<span style="color: #98C379">"AI"</span>, <span style="color: #98C379">"Innovation"</span>]',
                 '        <span style="color: #E06C75">self</span>.learning = <span style="color: #D19A66">True</span>'
             ];
 
@@ -1177,7 +1176,6 @@
 
                     {/* Terminal Hint - Desktop only */}
                     <div className="terminal-hint">
-                        <i className="fas fa-terminal text-sm md:text-base" style={{ color: 'var(--accent)' }}></i>
                         <span className="code-font" style={{ color: 'var(--text-primary)' }}>Press <kbd>/</kbd> for terminal</span>
                     </div>
 
@@ -1575,7 +1573,7 @@
                             <div className="max-w-6xl mx-auto text-center text-xs md:text-sm" style={{ color: 'var(--text-tertiary)' }}>
                                 <p className="mb-2">© 2025 Riccardo Oliva. All rights reserved.</p>
                                 <p className="code-font text-xs">
-                                    <i className="fas fa-code mr-2"></i>Built with passion and innovation
+                                    <i className="fas fa-code mr-2"></i>Built with Claude
                                 </p>
                             </div>
                         </footer>
