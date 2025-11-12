@@ -1,7 +1,7 @@
 {
   "name": "riccardo-oliva-portfolio",
-  "version": "1.0.0",
-  "description": "Personal portfolio website with Netlify CMS",
+  "version": "2.0.0",
+  "description": "Professional portfolio website - Mobile-first design with Netlify CMS",
   "scripts": {
     "build": "node admin/build_data.js",
     "dev": "npx http-server -p 8080",
@@ -11,10 +11,11 @@
     "portfolio",
     "netlify-cms",
     "responsive",
-    "react"
+    "react",
+    "mobile-first"
   ],
   "author": "Riccardo Oliva",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "netlify-cms-proxy-server": "^1.3.24"
   }

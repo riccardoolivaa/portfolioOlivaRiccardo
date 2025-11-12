@@ -7,11 +7,14 @@
       "technologies": [
         "HTML",
         "CSS",
-        "Design"
+        "Design",
+        "Responsive Web"
       ],
       "link": "https://andreaolivaarchitetto.netlify.app",
-      "featured": 1,
+      "github": "",
+      "featured": true,
       "screenshot": "",
+      "order": 1,
       "id": "andrea-oliva-architetto"
     }
   ],
@@ -21,36 +24,54 @@
       "position": "Software Engineer",
       "start_date": "August 2024",
       "end_date": "Present",
-      "description": "• Managed DAM, PIM, SRM systems\n• Software testing and digital project management\n• Tools: PL/SQL, Confluence, JIRA, Python",
+      "description": "• Manage 30-80 tickets monthly (incidents, requests, and support) across DAM, PIM, SRM, and B2B/B2C platforms, working alongside two senior team members\n• Gather and translate business requirements from IT and business users into technical specifications for external development teams\n• Execute manual functional testing on ~2 releases per month, identifying an average of 6 bugs per release cycle to ensure software stability\n• Provide first-level technical support to IT team for platform credentials and data inquiries, and to business users for assistance and feature requests\n• Modify and maintain Python and PL/SQL codebase for data integration and workflow automation (~15% of responsibilities)\n• Selected to lead 2 AI-focused projects in 2025 (AI-generated product descriptions/translations and image generation) under senior DAM manager mentorship",
       "tools": [
+        "Python",
         "PL/SQL",
-        "Confluence",
         "JIRA",
-        "Python"
+        "Confluence",
+        "DAM",
+        "PIM",
+        "SRM",
+        "Git"
       ],
-      "current": 1,
+      "current": true,
       "order": 1,
       "id": "max-mara-software-engineer"
+    },
+    {
+      "company": "Max Mara Fashion Group",
+      "position": "Software Programming Intern",
+      "start_date": "July 2022",
+      "end_date": "August 2022",
+      "description": "• Developed Python automation tool to extract and preprocess Excel data for ERP integration, eliminating manual data entry process\n• Worked on internal framework development\n• Gained hands-on experience with enterprise software systems",
+      "tools": [
+        "Python",
+        "Excel",
+        "ERP Systems"
+      ],
+      "current": false,
+      "order": 2,
+      "id": "max-mara-intern"
     }
   ],
-  "cooking": [],
   "bio": {
-    "about": "I'm a Software Engineer at Max Mara Fashion Group, where I manage complex systems including DAM, PIM, and SRM platforms. I specialize in creative problem-solving and finding innovative solutions to technical challenges.\nCurrently pursuing a Bachelor's Degree in Computer Engineering with a focus on Artificial Intelligence. While programming isn't my main passion, I'm genuinely fascinated by AI and its endless possibilities. What truly drives me is the creative aspect of problem-solving and bringing ideas to life.",
-    "tagline": "Creative problem-solver at Max Mara Fashion Group. Fascinated by AI, passionate about music production and cooking."
+    "about": "I'm a problem solver: I enjoy tackling complex challenges and wrestling with them until I find a solution. I'm exploring different areas of tech to understand where my skills can have the greatest impact. I love continuous learning, experimenting with new technologies, and taking initiative in the projects I work on.\n\nOutside the office, I'm passionate about cooking and music.",
+    "tagline": "Software Engineer at Max Mara Fashion Group | AI Student | Creative Problem Solver"
   },
   "skills": {
     "skills": [
       {
         "name": "Python",
-        "level": 95
+        "level": 70
       },
       {
         "name": "SQL",
-        "level": 90
+        "level": 75
       },
       {
         "name": "PL/SQL",
-        "level": 85
+        "level": 65
       },
       {
         "name": "HTML5 & CSS",
@@ -58,13 +79,13 @@
       },
       {
         "name": "C++",
-        "level": 70
+        "level": 40
       },
       {
         "name": "Java",
-        "level": 65
+        "level": 50
       }
     ]
   },
-  "buildDate": "2025-10-29T21:54:02.153Z"
+  "buildDate": "2025-11-12T22:45:00.000Z"
 }

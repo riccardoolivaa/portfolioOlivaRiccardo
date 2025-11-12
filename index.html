@@ -334,46 +334,81 @@
             word-break: break-word;
         }
 
-        /* Mobile-optimized terminal hint */
-        .terminal-hint {
+        /* Floating terminal button - mobile first */
+        .terminal-button {
             position: fixed;
             bottom: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--card-bg);
-            border: 2px solid var(--accent);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 12px;
+            left: 20px;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            cursor: pointer;
             z-index: 100;
-            box-shadow: 0 4px 15px var(--shadow);
-            max-width: 90%;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4);
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+            border: none;
+        }
+
+        .terminal-button:active {
+            transform: scale(0.95);
+        }
+
+        .terminal-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.6);
+        }
+
+        .terminal-button i {
+            color: white;
+            font-size: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .terminal-button {
+                width: 50px;
+                height: 50px;
+                bottom: 30px;
+                left: 30px;
+            }
+
+            .terminal-button i {
+                font-size: 22px;
+            }
+        }
+
+        /* Keyboard hint - desktop only */
+        .terminal-hint {
+            display: none;
         }
 
         @media (min-width: 768px) {
             .terminal-hint {
+                display: flex;
+                position: fixed;
                 bottom: 30px;
-                left: 30px;
-                transform: none;
+                left: 90px;
+                background: var(--card-bg);
+                border: 2px solid var(--accent);
                 padding: 12px 20px;
+                border-radius: 30px;
                 font-size: 14px;
+                align-items: center;
+                gap: 10px;
+                z-index: 100;
+                box-shadow: 0 4px 15px var(--shadow);
             }
-        }
 
-        .terminal-hint kbd {
-            background: var(--accent);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        @media (min-width: 768px) {
             .terminal-hint kbd {
+                background: var(--accent);
+                color: white;
+                padding: 4px 12px;
+                border-radius: 6px;
+                font-weight: 600;
                 font-size: 16px;
             }
         }
@@ -702,7 +737,7 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        const Terminal = ({ isOpen, onClose }) => {
+        const Terminal = ({ isOpen, onClose, siteData }) => {
             const [history, setHistory] = useState([
                 { type: 'output', content: 'Welcome to Riccardo\'s terminal! Type "help" for available commands.' }
             ]);
@@ -722,12 +757,76 @@
                 }
             }, [history]);
 
+            // Build skills command output from data
+            const buildSkillsOutput = () => {
+                if (!siteData?.skills?.skills || siteData.skills.skills.length === 0) {
+                    return 'No skills data available.';
+                }
+                
+                let output = 'Technical Skills:\n';
+                const skills = siteData.skills.skills;
+                
+                // Group by level
+                const advanced = skills.filter(s => s.level >= 85);
+                const intermediate = skills.filter(s => s.level >= 70 && s.level < 85);
+                const learning = skills.filter(s => s.level < 70);
+                
+                if (advanced.length > 0) {
+                    output += '• Advanced: ' + advanced.map(s => `${s.name} (${s.level}%)`).join(', ') + '\n';
+                }
+                if (intermediate.length > 0) {
+                    output += '• Intermediate: ' + intermediate.map(s => `${s.name} (${s.level}%)`).join(', ') + '\n';
+                }
+                if (learning.length > 0) {
+                    output += '• Learning: ' + learning.map(s => `${s.name} (${s.level}%)`).join(', ');
+                }
+                
+                output += '\n• Tools: Git, JIRA, Confluence, DAM, PIM, SRM/SCM, ERP';
+                return output;
+            };
+
+            // Build projects command output from data
+            const buildProjectsOutput = () => {
+                if (!siteData?.projects || siteData.projects.length === 0) {
+                    return 'No projects available yet. Check back soon!';
+                }
+                
+                let output = 'Recent Projects:\n';
+                siteData.projects.forEach((project, index) => {
+                    output += `${index + 1}. ${project.title}`;
+                    if (project.category) output += ` (${project.category})`;
+                    output += '\n';
+                    if (project.description) output += `   ${project.description.substring(0, 80)}...\n`;
+                    if (project.link) output += `   Visit: ${project.link}\n`;
+                });
+                return output;
+            };
+
+            // Build experience command output from data
+            const buildExperienceOutput = () => {
+                if (!siteData?.experiences || siteData.experiences.length === 0) {
+                    return 'No experience data available.';
+                }
+                
+                let output = 'Work Experience:\n';
+                siteData.experiences
+                    .filter(exp => exp.current)
+                    .forEach(exp => {
+                        output += `\n${exp.position} at ${exp.company}\n`;
+                        output += `${exp.start_date} - ${exp.end_date || 'Present'}\n`;
+                        if (exp.tools && exp.tools.length > 0) {
+                            output += `Tools: ${exp.tools.join(', ')}`;
+                        }
+                    });
+                return output;
+            };
+
             const commands = {
                 help: 'Available commands:\n• help - Show this message\n• about - Learn more about me\n• skills - View my technical skills\n• projects - List my projects\n• experience - Work experience\n• education - Academic background\n• contact - Get my contact info\n• clear - Clear terminal\n• exit - Close terminal',
-                about: 'I\'m a problem solver who enjoys tackling complex challenges and wrestling with them until I find a solution. I\'m exploring different areas of tech to understand where my skills can have the greatest impact. I love continuous learning, experimenting with new technologies, and taking initiative in the projects I work on.',
-                skills: 'Technical Skills:\n• Advanced: Python (95%), SQL (90%), PL/SQL (85%)\n• Languages: C++ (70%), Java (65%)\n• Web: HTML5, CSS, Flask, Jinja\n• Tools: Git, JIRA, Confluence, DAM, PIM, SRM/SCM, ERP',
-                projects: 'Recent Projects:\n1. Andrea Oliva Architetto - Full website for architecture studio\n   Visit: andreaolivaarchitetto.netlify.app',
-                experience: 'Current Position:\nSoftware Engineer at Max Mara Fashion Group (Aug 2024 - Present)\n• Managing 30-80 tickets monthly across DAM, PIM, SRM platforms\n• Requirements gathering and technical documentation\n• Manual functional testing (~2 releases/month)\n• Python and PL/SQL development',
+                about: siteData?.bio?.about || 'I\'m a problem solver who enjoys tackling complex challenges and wrestling with them until I find a solution.',
+                skills: buildSkillsOutput(),
+                projects: buildProjectsOutput(),
+                experience: buildExperienceOutput(),
                 education: 'Education:\n• Bachelor in Computer Engineering - AI (2025-2029)\n  Università degli Studi "Guglielmo Marconi"\n• Software Developer Certification (2024)\n  Umana S.P.A\n• Diploma in Computer Science (2022)\n  I.I.S. Blaise Pascal',
                 contact: 'Contact Information:\n• Email: riccardooliva2003@gmail.com\n• Phone: +39 339 143 0692\n• Location: Reggio nell\'Emilia, IT\n• GitHub: github.com/riccardooliva',
                 clear: 'CLEAR',
@@ -943,16 +1042,41 @@
             const [terminalOpen, setTerminalOpen] = useState(false);
             const [formStatus, setFormStatus] = useState('');
             const [theme, setTheme] = useState('dark');
-            const [loading, setLoading] = useState(false);
+            const [loading, setLoading] = useState(true);
+            const [siteData, setSiteData] = useState(null);
 
-            const skillsData = [
-                { name: "Python", level: 95 },
-                { name: "SQL", level: 90 },
-                { name: "PL/SQL", level: 85 },
-                { name: "HTML5 & CSS", level: 80 },
-                { name: "C++", level: 70 },
-                { name: "Java", level: 65 }
-            ];
+            // Load site data from JSON
+            useEffect(() => {
+                fetch('/data/site-data.json')
+                    .then(res => res.json())
+                    .then(data => {
+                        setSiteData(data);
+                        setLoading(false);
+                    })
+                    .catch(err => {
+                        console.error('Error loading site data:', err);
+                        // Fallback data if JSON not found
+                        setSiteData({
+                            projects: [],
+                            experiences: [],
+                            bio: {
+                                about: "I'm a problem solver: I enjoy tackling complex challenges and wrestling with them until I find a solution.",
+                                tagline: "Software Engineer at Max Mara Fashion Group | AI Student"
+                            },
+                            skills: {
+                                skills: [
+                                    { name: "Python", level: 95 },
+                                    { name: "SQL", level: 90 },
+                                    { name: "PL/SQL", level: 85 },
+                                    { name: "HTML5 & CSS", level: 80 },
+                                    { name: "C++", level: 70 },
+                                    { name: "Java", level: 65 }
+                                ]
+                            }
+                        });
+                        setLoading(false);
+                    });
+            }, []);
 
             useEffect(() => {
                 document.documentElement.setAttribute('data-theme', theme);
@@ -997,6 +1121,22 @@
                 return () => window.removeEventListener('scroll', handleScroll);
             }, []);
 
+            if (loading) {
+                return (
+                    <div className="min-h-screen flex items-center justify-center">
+                        <div className="text-center">
+                            <div className="loading-spinner mx-auto mb-4"></div>
+                            <p style={{ color: 'var(--text-secondary)' }}>Loading portfolio...</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            const skillsData = siteData?.skills?.skills || [];
+            const projectsData = siteData?.projects || [];
+            const bioData = siteData?.bio || {};
+            const experiencesData = siteData?.experiences || [];
+
             const scrollToSection = (sectionId) => {
                 const element = document.getElementById(sectionId);
                 if (element) {
@@ -1006,8 +1146,18 @@
 
             return (
                 <>
-                    <Terminal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
+                    <Terminal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} siteData={siteData} />
                     <BackToTop />
+
+                    {/* Floating Terminal Button */}
+                    <button 
+                        className="terminal-button" 
+                        onClick={() => setTerminalOpen(true)}
+                        aria-label="Open terminal"
+                        title="Open terminal"
+                    >
+                        <i className="fas fa-terminal"></i>
+                    </button>
 
                     {/* Theme Toggle */}
                     <button 
@@ -1018,7 +1168,7 @@
                         <i className={`fas ${theme === 'dark' ? 'fa-sun' : 'fa-moon'} text-xl md:text-2xl`} style={{ color: 'var(--accent)' }}></i>
                     </button>
 
-                    {/* Terminal Hint */}
+                    {/* Terminal Hint - Desktop only */}
                     <div className="terminal-hint">
                         <i className="fas fa-terminal text-sm md:text-base" style={{ color: 'var(--accent)' }}></i>
                         <span className="code-font" style={{ color: 'var(--text-primary)' }}>Press <kbd>/</kbd> for terminal</span>
