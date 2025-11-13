@@ -2,27 +2,27 @@
   "skills": [
     {
       "name": "Python",
-      "level": 70
+      "level": 25
     },
     {
       "name": "SQL",
-      "level": 75
+      "level": 35
     },
     {
       "name": "PL/SQL",
-      "level": 65
+      "level": 25
     },
     {
       "name": "HTML5 & CSS",
-      "level": 80
+      "level": 50
     },
     {
       "name": "C++",
-      "level": 40
+      "level": 15
     },
     {
       "name": "Java",
-      "level": 50
+      "level": 20
     }
   ]
 }
